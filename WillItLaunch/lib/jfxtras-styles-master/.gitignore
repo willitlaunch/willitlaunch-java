@@ -1,0 +1,31 @@
+*.class
+
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Scene builder backup files
+*.bak
+
+# windows thumbnail files
+*.db
+
+<<<<<<< HEAD
+# Scenic view auxiliary file
+scenicView.properties
+
+# Intellij IDEA output dir
+src/out/
+
+
+=======
+# Scenic View auxiliary file
+scenicView.properties
+
+# Intellij IDE output dir
+src/out/
+>>>>>>> refs/heads/jmetro
+
+src/.idea/workspace.xml
