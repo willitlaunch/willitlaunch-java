@@ -11,7 +11,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+
 
 /**
  *
@@ -20,17 +26,29 @@ import javafx.scene.control.Label;
 public class LoadScreenController implements Initializable {
     
     @FXML
-    private Label label;
+    private TextField ipBox;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private Button connect;
+    
+    @FXML
+    private Pane logoPane;
+    
+    @FXML
+    private void connectTo(ActionEvent event) {
+        
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+//       Image img = new Image(getClass().getResourceAsStream("/rocket.png"),200,200,false,false);
+//       
+////        ImageView imgView = new ImageView(img);
+//        ImageView iv = new ImageView(img);
+//        
+//        
+//        logoPane.getChildren().add(iv);
+
     }    
     
 }
