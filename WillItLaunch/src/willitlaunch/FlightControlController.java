@@ -30,6 +30,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javax.swing.SwingUtilities;
 import willitlaunch.controls.BarsControl;
+import willitlaunch.controls.BoolControl;
 import willitlaunch.controls.DialControl;
 
 /**
@@ -66,9 +67,6 @@ public class FlightControlController implements Initializable {
         SimpleGauge simpleGauge = new SimpleGauge();
         simpleGauge.valueProperty().bind(gaugeValue);
         createGauge(simpleGauge,0,2);
-        RadialSteelGauge rsGauge = new RadialSteelGauge();
-        rsGauge.valueProperty().bind(gaugeValue);
-        createGauge(rsGauge,0,3);
         RadialBargraph rbg = new RadialBargraph();
         rbg.valueProperty().bind(gaugeValue);
         createGauge(rbg,1,0);
@@ -80,10 +78,13 @@ public class FlightControlController implements Initializable {
         testControl.name.set("Temperature");
         createGauge(testControl, 1, 2);
         
-        DialControl testControl2 = new DialControl(2);
+        DialControl testControl2 = new DialControl(4);
         testControl2.value.bind(gaugeValue);
         testControl2.name.set("Temperature");
         createGauge(testControl2, 1, 3);
+        BoolControl testControl3 = new BoolControl(3);
+        testControl3.name.set("OverPressure");
+        createGauge(testControl3, 2, 0);
         runGauges();
     }   
     
