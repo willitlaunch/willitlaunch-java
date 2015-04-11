@@ -21,9 +21,12 @@ public class WillItLaunch extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("LoadScreen.fxml"));
+       // String css = WillItLaunch.class.getResource("/jarcss.css").toExternalForm();
         
+        //root.setStyle(STYLESHEET_MODENA);
         Scene scene = new Scene(root);
-        
+//        scene.getStylesheets().clear();
+//        scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
     }
