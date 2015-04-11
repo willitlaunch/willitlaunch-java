@@ -11,12 +11,14 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.util.Random;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
 import org.json.JSONObject;
 
@@ -24,7 +26,7 @@ import org.json.JSONObject;
  *
  * @author ben
  */
-public abstract class ControlBase extends AnchorPane{
+public abstract class ControlBase extends StackPane{
     public static Random rand = new Random();
     public int id = rand.nextInt();
     public StringProperty name = new SimpleStringProperty();
@@ -36,7 +38,8 @@ public abstract class ControlBase extends AnchorPane{
         title.getStyleClass().add("item-title");
         title.textProperty().bind(name);
         this.getChildren().add(title);
-        AnchorPaneUtils.setAnchors(title, 0.0, 0.0, null, 0.0);
+        StackPane.setAlignment(title, Pos.TOP_CENTER);
+       
         title.setTextAlignment(TextAlignment.CENTER);
         title.setAlignment(Pos.CENTER);
         
@@ -47,7 +50,8 @@ public abstract class ControlBase extends AnchorPane{
     protected void addGauge(Region region){
         AnchorPaneUtils.setAnchors(region, 50.0, null, 0.0, null);
         this.getChildren().add(region);
-        region.setCenterShape(true);
+        region.setPadding(new Insets(25));
+        StackPane.setAlignment(region, Pos.CENTER);
         region.toBack();
     }
     

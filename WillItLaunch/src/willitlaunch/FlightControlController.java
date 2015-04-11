@@ -65,36 +65,7 @@ public class FlightControlController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        msg.listen();
-        
-//        Gauge gauge = new Gauge();
-//        gauge.valueProperty().bind(gaugeValue);
-//        createGauge(gauge,0,0);
-//        Linear linear = new Linear();
-//        linear.valueProperty().bind(gaugeValue);
-//        createGauge(linear,0,1);
-//        SimpleGauge simpleGauge = new SimpleGauge();
-//        simpleGauge.valueProperty().bind(gaugeValue);
-//        createGauge(simpleGauge,0,2);
-//        RadialSteelGauge rsGauge = new RadialSteelGauge();
-//        rsGauge.valueProperty().bind(gaugeValue);
-//        createGauge(rsGauge,0,3);
-//        RadialBargraph rbg = new RadialBargraph();
-//        rbg.valueProperty().bind(gaugeValue);
-//        createGauge(rbg,1,0);
-//        SimpleGauge sGauge = new SimpleGauge();
-//        sGauge.valueProperty().bind(gaugeValue);
-//        createGauge(sGauge,1,1);
-//        BarsControl testControl = new BarsControl(2);
-//        testControl.value.bind(gaugeValue);
-//        testControl.name.set("Temperature");
-//        createGauge(testControl, 1, 2);
-//        
-//        DialControl testControl2 = new DialControl(2);
-//        testControl2.value.bind(gaugeValue);
-//        testControl2.name.set("Temperature");
-//        createGauge(testControl2, 1, 3);
-//        runGauges();
+        msg.listen();   
     }   
     
     public void runGauges(){

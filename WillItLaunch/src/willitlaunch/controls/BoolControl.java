@@ -10,10 +10,15 @@ import eu.hansolo.enzo.common.Section;
 import eu.hansolo.enzo.gauge.Gauge;
 import eu.hansolo.enzo.gauge.Linear;
 import eu.hansolo.enzo.gauge.SimpleGauge;
+import eu.hansolo.enzo.simpleindicator.SimpleIndicator;
+import eu.hansolo.enzo.simpleindicator.SimpleIndicator.IndicatorStyle;
+import eu.hansolo.enzo.simpleindicator.SimpleIndicatorBuilder;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.layout.GridPane;
 import org.json.JSONObject;
 
@@ -22,16 +27,16 @@ import org.json.JSONObject;
  * @author ben
  */
 public class BoolControl extends ControlBase {
-    public BooleanProperty value = new SimpleBooleanProperty(false);
-    
-    SimpleGauge linear;
+    public BooleanProperty value = new SimpleBooleanProperty(true);
+    public ObjectProperty<IndicatorStyle> style = new SimpleObjectProperty<IndicatorStyle>(IndicatorStyle.RED);
+     
+    SimpleIndicator linear;
     public BoolControl(int id) {
         super(id);
-        
-        linear = new SimpleGauge();
-        //linear.valueProperty().bind(value);
+        linear = new SimpleIndicator();
+        linear.onProperty().bind(linear.pressedProperty());
+        linear.indicatorStyleProperty().bind(style);
         addGauge(linear);
-        
     }
 
     BoolControl(int id, String label) {
@@ -41,16 +46,8 @@ public class BoolControl extends ControlBase {
 
     @Override
     protected void configureGauge() {
-        linear.setTitle("Default");
-        linear.setUnit("°C");
-        linear.setSections(new Section(104, 140),
-                          new Section(140, 176),
-                          new Section(176, 212));
-        linear.setStyle("-needle       : rgb(  0,   0, 255);" +
-                       "-section0-fill: rgb(255, 0,   0);" +
-                       "-section1-fill: rgb(0, 255,   0);" +
-                       "-section2-fill: rgb(0,   0,   255);");
-
+       
+        
     }
     
     @Override
