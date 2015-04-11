@@ -37,7 +37,7 @@ public class LoadScreenController implements Initializable {
     
     @FXML
     private void connectTo(ActionEvent event) {
-        
+        connectToServer(ipBox.getText());
     }
     
     @Override
@@ -53,7 +53,9 @@ public class LoadScreenController implements Initializable {
     }    
     
     private boolean connectToServer(String ip){
-       
+        if (ip != ""){
+            WillItLaunch.load(Screen.FlightControl);
+        }
         return false;
     }
     

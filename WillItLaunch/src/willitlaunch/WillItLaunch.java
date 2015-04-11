@@ -6,6 +6,7 @@
 
 package willitlaunch;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,17 +19,34 @@ import javafx.stage.Stage;
  */
 public class WillItLaunch extends Application {
     
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoadScreen.fxml"));
-       // String css = WillItLaunch.class.getResource("/jarcss.css").toExternalForm();
-        
-        //root.setStyle(STYLESHEET_MODENA);
-        Scene scene = new Scene(root);
+    private static Stage stage = null;
+    
+    public static void load(Screen screenType){
+        try {
+          
 //        scene.getStylesheets().clear();
 //        scene.getStylesheets().add(css);
-        stage.setScene(scene);
-        stage.show();
+ 
+            Parent rootScreen = FXMLLoader.load(WillItLaunch.class.getResource(screenType.getPath()));
+            Scene scene = new Scene(rootScreen);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e){
+            System.out.println("Cannot load screen "+e.getMessage());
+        }
+    }
+    
+    
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+        
+       // String css = WillItLaunch.class.getResource("/jarcss.css").toExternalForm();
+        this.stage = stage;
+        load(Screen.Load);
+        //root.setStyle(STYLESHEET_MODENA);
+//        scene.getStylesheets().clear();
+//        scene.getStylesheets().add(css);
     }
 
     /**
