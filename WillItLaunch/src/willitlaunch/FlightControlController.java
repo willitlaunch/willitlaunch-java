@@ -20,6 +20,8 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -55,15 +57,18 @@ public class FlightControlController implements Initializable {
     private GridPane gaugesGrid;
     @FXML
     private GridPane controlsGrid;
+    @FXML
+    private Label controllerTitle;
 
     public HashMap<Integer,ControlBase> outputControlMap = new HashMap<Integer,ControlBase>();
-    
+    public StringProperty title = new SimpleStringProperty();
     private DoubleProperty gaugeValue = new SimpleDoubleProperty(0.0);
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        controllerTitle.textProperty().bind(title);
         msg.listen();   
     }   
     
