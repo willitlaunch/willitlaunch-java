@@ -35,6 +35,7 @@ public abstract class ControlBase extends StackPane{
     
     
     public ControlBase(int id){
+        this.id = id;
         title.getStyleClass().add("item-title");
         title.textProperty().bind(name);
         this.getChildren().add(title);
@@ -57,7 +58,7 @@ public abstract class ControlBase extends StackPane{
     
     public static ControlBase createControl(JSONObject obj)
     {
-        int id = (int)obj.get("wid") + (int)obj.get("gid")*100;
+        int id = (int)obj.get("wid") + ((int)obj.get("gid")*100);
         OutputType type = Enum.valueOf(OutputType.class, obj.get("type").toString());
         String label = obj.get("label").toString();
         //if (type == OutputType.bars) return new BarsControl(id, (double)obj.get("max"), (double)obj.get("min"), label);

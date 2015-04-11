@@ -59,7 +59,7 @@ public class MessageManager {
         {
             JSONObject widget = widgetList.getJSONObject(i);
             ControlBase wid = ControlBase.createControl(widget);
-            fcc.createGauge(wid);
+            if (wid != null) fcc.createGauge(wid);
         }    
     }
     
@@ -76,9 +76,18 @@ public class MessageManager {
         JSONArray widgetList = obj.getJSONArray("outputWidgets");
         for(int i=0;i<widgetList.length();i++)
         {
+            try
+            {
             JSONObject widget = widgetList.getJSONObject(i);
-            int id = (int)obj.get("wid") + (int)obj.get("gid")*100;
-            fcc.updateGauge(id, widget);
+            int wid = (int)widget.get("wid");
+            int gid = (int)widget.get("gid");
+            fcc.updateGauge(wid+(gid*100), widget);
+            }
+            catch(Exception e)
+            {
+                System.out.println("");
+                      
+            }
         }
     }
 }
