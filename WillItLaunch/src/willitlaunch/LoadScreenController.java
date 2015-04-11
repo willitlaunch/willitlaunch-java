@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import willitlaunch.messaging.WebSocketClientEndPoint;
+import willitlaunch.messaging.MessageManager;
 
 
 /**
@@ -25,6 +25,8 @@ import willitlaunch.messaging.WebSocketClientEndPoint;
  * @author ben
  */
 public class LoadScreenController implements Initializable {
+    
+    MessageManager msg = new MessageManager();
     
     @FXML
     private TextField ipBox;
@@ -47,6 +49,7 @@ public class LoadScreenController implements Initializable {
 ////        ImageView imgView = new ImageView(img);
 //        ImageView iv = new ImageView(img);
 //        
+        msg.listen();
 //        
 //        logoPane.getChildren().add(iv);
 
