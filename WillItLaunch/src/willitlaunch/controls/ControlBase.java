@@ -10,6 +10,7 @@ import Utils.AnchorPaneUtils;
 import java.util.Random;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -35,6 +36,7 @@ public abstract class ControlBase extends AnchorPane{
         this.getChildren().add(title);
         AnchorPaneUtils.setAnchors(title, 0.0, 0.0, null, 0.0);
         title.setTextAlignment(TextAlignment.CENTER);
+        title.setAlignment(Pos.CENTER);
         
     }
     
@@ -43,6 +45,8 @@ public abstract class ControlBase extends AnchorPane{
     protected void addGauge(Region region){
         AnchorPaneUtils.setAnchors(region, 50.0, null, 0.0, null);
         this.getChildren().add(region);
+        region.setCenterShape(true);
+        region.toBack();
     }
     
 }

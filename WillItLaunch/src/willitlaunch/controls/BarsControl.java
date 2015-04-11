@@ -15,13 +15,18 @@ import javafx.scene.layout.GridPane;
  *
  * @author ben
  */
-public class TemperatureControl extends ControlBase {
+public class BarsControl extends ControlBase {
     public DoubleProperty value = new SimpleDoubleProperty(0.0);
+    public DoubleProperty max = new SimpleDoubleProperty(100.0);
+    public DoubleProperty min = new SimpleDoubleProperty(0.0);
+    
     Linear linear;
-    public TemperatureControl(int id) {
+    public BarsControl(int id) {
         super(id);
         
         linear = new Linear();
+        linear.minValueProperty().bind(min);
+        linear.maxValueProperty().bind(max);
         linear.valueProperty().bind(value);
         addGauge(linear);
         

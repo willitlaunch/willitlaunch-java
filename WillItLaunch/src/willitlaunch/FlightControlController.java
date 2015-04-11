@@ -29,7 +29,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javax.swing.SwingUtilities;
-import willitlaunch.controls.TemperatureControl;
+import willitlaunch.controls.BarsControl;
+import willitlaunch.controls.DialControl;
 
 /**
  * FXML Controller class
@@ -74,10 +75,15 @@ public class FlightControlController implements Initializable {
         SimpleGauge sGauge = new SimpleGauge();
         sGauge.valueProperty().bind(gaugeValue);
         createGauge(sGauge,1,1);
-        TemperatureControl testControl = new TemperatureControl(2);
+        BarsControl testControl = new BarsControl(2);
         testControl.value.bind(gaugeValue);
         testControl.name.set("Temperature");
         createGauge(testControl, 1, 2);
+        
+        DialControl testControl2 = new DialControl(2);
+        testControl2.value.bind(gaugeValue);
+        testControl2.name.set("Temperature");
+        createGauge(testControl2, 1, 3);
         runGauges();
     }   
     

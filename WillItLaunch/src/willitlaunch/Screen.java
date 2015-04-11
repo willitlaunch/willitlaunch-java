@@ -11,8 +11,11 @@ package willitlaunch;
  * @author ben
  */
 public enum Screen {
-    Load("LoadScreen.fxml"),FlightControl("FlightControl.fxml");
+    Load("LoadScreen.fxml"),
+    FlightControl("FlightControl.fxml");
+    
     private String path = "";
+    
     private Screen(String path){
         this.path = path;
     }
