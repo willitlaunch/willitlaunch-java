@@ -19,6 +19,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import org.json.JSONObject;
 
@@ -37,6 +38,8 @@ public class BoolControl extends ControlBase {
         linear.onProperty().bind(linear.pressedProperty());
         linear.indicatorStyleProperty().bind(style);
         addGauge(linear);
+        
+        this.setPadding(new Insets(50));
     }
 
     BoolControl(int id, String label) {
