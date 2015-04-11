@@ -27,7 +27,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javax.swing.SwingUtilities;
+import willitlaunch.controls.TemperatureControl;
 
 /**
  * FXML Controller class
@@ -62,16 +64,20 @@ public class FlightControlController implements Initializable {
         createGauge(linear,0,1);
         SimpleGauge simpleGauge = new SimpleGauge();
         simpleGauge.valueProperty().bind(gaugeValue);
-        createGauge(simpleGauge,1,1);
+        createGauge(simpleGauge,0,2);
         RadialSteelGauge rsGauge = new RadialSteelGauge();
         rsGauge.valueProperty().bind(gaugeValue);
-        createGauge(rsGauge,1,2);
+        createGauge(rsGauge,0,3);
         RadialBargraph rbg = new RadialBargraph();
         rbg.valueProperty().bind(gaugeValue);
-        createGauge(rbg,0,2);
+        createGauge(rbg,1,0);
         SimpleGauge sGauge = new SimpleGauge();
         sGauge.valueProperty().bind(gaugeValue);
-        createGauge(sGauge,2,2);
+        createGauge(sGauge,1,1);
+        TemperatureControl testControl = new TemperatureControl(2);
+        testControl.value.bind(gaugeValue);
+        testControl.name.set("Temperature");
+        createGauge(testControl, 1, 2);
         runGauges();
     }   
     
@@ -92,14 +98,14 @@ public class FlightControlController implements Initializable {
         }, 0, 2000);
     }
     
-    public void createGauge(Control gauge,int row,int col){
+    public void createGauge(Region gauge,int row,int col){
         
         setGaugeDefaults(gauge);
-        GridPane.setConstraints(gauge, row, col);
+        GridPane.setConstraints(gauge, col, row);
         gaugesGrid.getChildren().add(gauge);
     }
     
-    private void setGaugeDefaults(Control gauge) {
+    private void setGaugeDefaults(Region gauge) {
 //    gauge.setTitle("Default");
 //    gauge.setUnit("°F");
 //    gauge.setMinValue(32);
@@ -107,11 +113,11 @@ public class FlightControlController implements Initializable {
 //    gauge.setSections(new Section(104, 140),
 //                      new Section(140, 176),
 //                      new Section(176, 212));
-    gauge.setStyle("-needle       : rgb(  0,   0, 255);" +
-                   "-section0-fill: rgb(255, 0,   0);" +
-                   "-section1-fill: rgb(0, 255,   0);" +
-                   "-section2-fill: rgb(0,   0,   255);");
+        gauge.setStyle("-needle       : rgb(  0,   0, 255);" +
+                       "-section0-fill: rgb(255, 0,   0);" +
+                       "-section1-fill: rgb(0, 255,   0);" +
+                       "-section2-fill: rgb(0,   0,   255);");
 
-}
+    }
     
 }
