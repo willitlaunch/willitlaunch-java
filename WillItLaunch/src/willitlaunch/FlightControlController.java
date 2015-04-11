@@ -32,7 +32,6 @@ import javafx.scene.layout.Region;
 import javax.swing.SwingUtilities;
 import org.json.JSONObject;
 import willitlaunch.controls.BarsControl;
-import willitlaunch.controls.BaseControl;
 import willitlaunch.controls.ControlBase;
 import willitlaunch.controls.DialControl;
 import willitlaunch.messaging.MessageManager;
@@ -86,17 +85,30 @@ public class FlightControlController implements Initializable {
     }
     
         
-    public void createGauge(Region gauge){
-        
+    public void createGauge(ControlBase gauge){
+        outputControlMap.put(gauge.id, gauge);
+        int row = (int)Math.floor(outputControlMap.keySet().size()/4.0);
+        int col = outputControlMap.keySet().size() % 4;
+         Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        createGauge(gauge, row, col);
+                    }
+                });
         
     }    
     
     public void createGauge(ControlBase gauge,int row,int col){
-        
+        try{
         setGaugeDefaults(gauge);
         GridPane.setConstraints(gauge, col, row);
         gaugesGrid.getChildren().add(gauge);
-        outputControlMap.put(gauge.id, gauge);
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
     
     public void updateGauge(int id, JSONObject object)

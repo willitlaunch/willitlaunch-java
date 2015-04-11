@@ -35,7 +35,7 @@ public class BoolControl extends ControlBase {
     public BoolControl(int id) {
         super(id);
         linear = new SimpleIndicator();
-        linear.onProperty().bind(linear.pressedProperty());
+        linear.onProperty().bind(value);
         linear.indicatorStyleProperty().bind(style);
         addGauge(linear);
         
@@ -43,8 +43,8 @@ public class BoolControl extends ControlBase {
     }
 
     BoolControl(int id, String label) {
-        super(id);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this(id); 
+        this.name.set(label);
     }
 
     @Override

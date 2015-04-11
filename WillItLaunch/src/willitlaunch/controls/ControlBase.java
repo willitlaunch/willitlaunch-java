@@ -41,8 +41,7 @@ public abstract class ControlBase extends StackPane{
         StackPane.setAlignment(title, Pos.TOP_CENTER);
        
         title.setTextAlignment(TextAlignment.CENTER);
-        title.setAlignment(Pos.CENTER);
-        
+        title.setAlignment(Pos.CENTER);     
     }
     
     protected abstract void configureGauge();
@@ -58,12 +57,12 @@ public abstract class ControlBase extends StackPane{
     
     public static ControlBase createControl(JSONObject obj)
     {
-        int id = (int)obj.get("id");
+        int id = (int)obj.get("wid") + (int)obj.get("gid")*100;
         OutputType type = Enum.valueOf(OutputType.class, obj.get("type").toString());
         String label = obj.get("label").toString();
-        if (type == OutputType.bars) return new BarsControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
+        //if (type == OutputType.bars) return new BarsControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
         if (type == OutputType.dial) return new DialControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
-        if (type == OutputType.bars) return new BoolControl(id, label);
+        if (type == OutputType.bool) return new BoolControl(id, label);
         return null;
     }
     

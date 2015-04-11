@@ -48,6 +48,7 @@ public class WebMessager extends WebSocketClient{
             @Override
             public void onError(Exception excptn) {
                 System.out.println("IZZ ALL GON RONG AYE"); 
+                System.out.println(excptn.getMessage());
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         

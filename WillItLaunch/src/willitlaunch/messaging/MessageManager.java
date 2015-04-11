@@ -77,7 +77,8 @@ public class MessageManager {
         for(int i=0;i<widgetList.length();i++)
         {
             JSONObject widget = widgetList.getJSONObject(i);
-            fcc.updateGauge((int)widget.get("id"), widget);
+            int id = (int)obj.get("wid") + (int)obj.get("gid")*100;
+            fcc.updateGauge(id, widget);
         }
     }
 }
