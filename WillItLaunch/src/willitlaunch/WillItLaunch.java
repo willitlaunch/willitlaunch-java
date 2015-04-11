@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 /**
  *
  * @author ben
@@ -29,6 +30,8 @@ public class WillItLaunch extends Application {
  
             Parent rootScreen = FXMLLoader.load(WillItLaunch.class.getResource(screenType.getPath()));
             Scene scene = new Scene(rootScreen);
+            scene.getStylesheets().add(WillItLaunch.class.getResource("/jfxtras/styles/jmetro8/JMetroDarkTheme.css").toExternalForm());
+            
             stage.setScene(scene);
             stage.show();
         } catch (IOException e){
@@ -43,6 +46,7 @@ public class WillItLaunch extends Application {
         
        // String css = WillItLaunch.class.getResource("/jarcss.css").toExternalForm();
         this.stage = stage;
+        
         load(Screen.Load);
         //root.setStyle(STYLESHEET_MODENA);
 //        scene.getStylesheets().clear();
