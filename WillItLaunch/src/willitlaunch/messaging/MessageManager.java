@@ -13,13 +13,20 @@ import org.java_websocket.drafts.Draft_10;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import willitlaunch.FlightControlController;
+import willitlaunch.controls.ControlBase;
 
 public class MessageManager { 
+    FlightControlController fcc; 
     WebSocketClient wsc;
     Socket socket;
-    
+    boolean isFirstMessage = true;
     public final String url = "ws://intense-woodland-5574.herokuapp.com/ws";
     
+    public MessageManager(FlightControlController fcc)
+    {
+        this.fcc = fcc;
+    }
     
     public void listen()
     {
@@ -31,28 +38,46 @@ public class MessageManager {
     
     public void convertMessageToData(String message)
     {
-        // Determin if the message is the initial message or an update
-        
-        
-    }
-    
-    public void createControlsFromMessage(String message)
-    {
-        
-    }
-    
-    public void updateControlsFromMessage(String message)
-    {
         JSONObject obj = new JSONObject(message);
+        if (isFirstMessage)
+        {
+            isFirstMessage = false;
+            createOutputControlsFromMessage(obj);
+            createInputControlsFromMessage(obj);
+            createObjectiveListFromMessage(obj);
+        }
+        else
+        {
+            updateOutputControlsFromMessage(obj);
+        }
+    }
+    
+    public void createOutputControlsFromMessage(JSONObject obj)
+    {
         JSONArray widgetList = obj.getJSONArray("outputWidgets");
         for(int i=0;i<widgetList.length();i++)
         {
             JSONObject widget = widgetList.getJSONObject(i);
-            
-            // Need to search for the matching widget
-            
-            
-            
+            ControlBase wid = ControlBase.createControl(widget);
+            fcc.createGauge(wid);
+        }    
+    }
+    
+    public void createInputControlsFromMessage(JSONObject obj)
+    {
+    }
+    
+    public void createObjectiveListFromMessage(JSONObject obj)
+    {
+    }
+    
+    public void updateOutputControlsFromMessage(JSONObject obj)
+    {
+        JSONArray widgetList = obj.getJSONArray("outputWidgets");
+        for(int i=0;i<widgetList.length();i++)
+        {
+            JSONObject widget = widgetList.getJSONObject(i);
+            fcc.updateGauge((int)widget.get("id"), widget);
         }
     }
 }

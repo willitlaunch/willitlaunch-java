@@ -12,6 +12,7 @@ import eu.hansolo.enzo.gauge.RadialBargraph;
 import eu.hansolo.enzo.gauge.RadialSteelGauge;
 import eu.hansolo.enzo.gauge.SimpleGauge;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -29,8 +30,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javax.swing.SwingUtilities;
+import org.json.JSONObject;
 import willitlaunch.controls.BarsControl;
+import willitlaunch.controls.BaseControl;
+import willitlaunch.controls.ControlBase;
 import willitlaunch.controls.DialControl;
+import willitlaunch.messaging.MessageManager;
 
 /**
  * FXML Controller class
@@ -38,6 +43,7 @@ import willitlaunch.controls.DialControl;
  * @author ben
  */
 public class FlightControlController implements Initializable {
+    MessageManager msg = new MessageManager(this);
     @FXML
     private AnchorPane mainWindow;
     @FXML
@@ -51,40 +57,44 @@ public class FlightControlController implements Initializable {
     @FXML
     private GridPane controlsGrid;
 
+    public HashMap<Integer,ControlBase> outputControlMap = new HashMap<Integer,ControlBase>();
+    
     private DoubleProperty gaugeValue = new SimpleDoubleProperty(0.0);
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Gauge gauge = new Gauge();
-        gauge.valueProperty().bind(gaugeValue);
-        createGauge(gauge,0,0);
-        Linear linear = new Linear();
-        linear.valueProperty().bind(gaugeValue);
-        createGauge(linear,0,1);
-        SimpleGauge simpleGauge = new SimpleGauge();
-        simpleGauge.valueProperty().bind(gaugeValue);
-        createGauge(simpleGauge,0,2);
-        RadialSteelGauge rsGauge = new RadialSteelGauge();
-        rsGauge.valueProperty().bind(gaugeValue);
-        createGauge(rsGauge,0,3);
-        RadialBargraph rbg = new RadialBargraph();
-        rbg.valueProperty().bind(gaugeValue);
-        createGauge(rbg,1,0);
-        SimpleGauge sGauge = new SimpleGauge();
-        sGauge.valueProperty().bind(gaugeValue);
-        createGauge(sGauge,1,1);
-        BarsControl testControl = new BarsControl(2);
-        testControl.value.bind(gaugeValue);
-        testControl.name.set("Temperature");
-        createGauge(testControl, 1, 2);
+        msg.listen();
         
-        DialControl testControl2 = new DialControl(2);
-        testControl2.value.bind(gaugeValue);
-        testControl2.name.set("Temperature");
-        createGauge(testControl2, 1, 3);
-        runGauges();
+//        Gauge gauge = new Gauge();
+//        gauge.valueProperty().bind(gaugeValue);
+//        createGauge(gauge,0,0);
+//        Linear linear = new Linear();
+//        linear.valueProperty().bind(gaugeValue);
+//        createGauge(linear,0,1);
+//        SimpleGauge simpleGauge = new SimpleGauge();
+//        simpleGauge.valueProperty().bind(gaugeValue);
+//        createGauge(simpleGauge,0,2);
+//        RadialSteelGauge rsGauge = new RadialSteelGauge();
+//        rsGauge.valueProperty().bind(gaugeValue);
+//        createGauge(rsGauge,0,3);
+//        RadialBargraph rbg = new RadialBargraph();
+//        rbg.valueProperty().bind(gaugeValue);
+//        createGauge(rbg,1,0);
+//        SimpleGauge sGauge = new SimpleGauge();
+//        sGauge.valueProperty().bind(gaugeValue);
+//        createGauge(sGauge,1,1);
+//        BarsControl testControl = new BarsControl(2);
+//        testControl.value.bind(gaugeValue);
+//        testControl.name.set("Temperature");
+//        createGauge(testControl, 1, 2);
+//        
+//        DialControl testControl2 = new DialControl(2);
+//        testControl2.value.bind(gaugeValue);
+//        testControl2.name.set("Temperature");
+//        createGauge(testControl2, 1, 3);
+//        runGauges();
     }   
     
     public void runGauges(){
@@ -104,11 +114,24 @@ public class FlightControlController implements Initializable {
         }, 0, 2000);
     }
     
-    public void createGauge(Region gauge,int row,int col){
+        
+    public void createGauge(Region gauge){
+        
+        
+    }    
+    
+    public void createGauge(ControlBase gauge,int row,int col){
         
         setGaugeDefaults(gauge);
         GridPane.setConstraints(gauge, col, row);
         gaugesGrid.getChildren().add(gauge);
+        outputControlMap.put(gauge.id, gauge);
+    }
+    
+    public void updateGauge(int id, JSONObject object)
+    {
+        ControlBase widget = outputControlMap.get(id);
+        widget.update(object);      
     }
     
     private void setGaugeDefaults(Region gauge) {

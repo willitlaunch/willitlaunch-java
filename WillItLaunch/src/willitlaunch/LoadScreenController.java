@@ -26,8 +26,6 @@ import willitlaunch.messaging.MessageManager;
  */
 public class LoadScreenController implements Initializable {
     
-    MessageManager msg = new MessageManager();
-    
     @FXML
     private TextField ipBox;
     
@@ -48,9 +46,7 @@ public class LoadScreenController implements Initializable {
 //       
 ////        ImageView imgView = new ImageView(img);
 //        ImageView iv = new ImageView(img);
-//        
-        msg.listen();
-//        
+//               
 //        logoPane.getChildren().add(iv);
 
     }    

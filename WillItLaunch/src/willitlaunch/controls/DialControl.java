@@ -13,6 +13,7 @@ import eu.hansolo.enzo.gauge.SimpleGauge;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.GridPane;
+import org.json.JSONObject;
 
 /**
  *
@@ -24,12 +25,15 @@ public class DialControl extends ControlBase {
     public DoubleProperty min = new SimpleDoubleProperty(0.0);
     
     SimpleGauge linear;
-    public DialControl(int id) {
+    public DialControl(int id, double max, double min, String label) {
         super(id);
         
+        this.max.set(max);
+        this.min.set(min);
+        
         linear = new SimpleGauge();
-        linear.minValueProperty().bind(min);
-        linear.maxValueProperty().bind(max);
+        linear.minValueProperty().bind(this.min);
+        linear.maxValueProperty().bind(this.max);
         linear.valueProperty().bind(value);
         addGauge(linear);
         
@@ -49,7 +53,12 @@ public class DialControl extends ControlBase {
 
     }
     
-    
+    @Override
+    public void update(JSONObject obj)
+    {
+        double val = (double)obj.get("value");
+        value.set(val);
+    }
     
     
     

@@ -15,6 +15,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.GridPane;
+import org.json.JSONObject;
 
 /**
  *
@@ -33,6 +34,11 @@ public class BoolControl extends ControlBase {
         
     }
 
+    BoolControl(int id, String label) {
+        super(id);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     protected void configureGauge() {
         linear.setTitle("Default");
@@ -47,6 +53,12 @@ public class BoolControl extends ControlBase {
 
     }
     
+    @Override
+    public void update(JSONObject obj)
+    {
+        boolean val = (boolean)obj.get("value");
+        value.set(val);
+    }
     
     
     

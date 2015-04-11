@@ -20,7 +20,6 @@ public class MessageManagerTest {
     
     @Test
     public void hello() {
-        MessageManager msg = new MessageManager();
-        msg.listen();
+
     }
 }

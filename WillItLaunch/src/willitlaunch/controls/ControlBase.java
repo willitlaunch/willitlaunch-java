@@ -7,6 +7,7 @@
 package willitlaunch.controls;
 
 import Utils.AnchorPaneUtils;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.util.Random;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -17,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.TextAlignment;
+import org.json.JSONObject;
 
 /**
  *
@@ -49,4 +51,17 @@ public abstract class ControlBase extends AnchorPane{
         region.toBack();
     }
     
+    
+    public static ControlBase createControl(JSONObject obj)
+    {
+        int id = (int)obj.get("id");
+        OutputType type = Enum.valueOf(OutputType.class, obj.get("type").toString());
+        String label = obj.get("label").toString();
+        if (type == OutputType.bars) return new BarsControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
+        if (type == OutputType.dial) return new DialControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
+        if (type == OutputType.bars) return new BoolControl(id, label);
+        return null;
+    }
+    
+    public abstract void update(JSONObject obj);
 }

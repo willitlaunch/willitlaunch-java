@@ -10,6 +10,7 @@ import eu.hansolo.enzo.gauge.Linear;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.GridPane;
+import org.json.JSONObject;
 
 /**
  *
@@ -21,17 +22,27 @@ public class BarsControl extends ControlBase {
     public DoubleProperty min = new SimpleDoubleProperty(0.0);
     
     Linear linear;
-    public BarsControl(int id) {
+    public BarsControl(int id, double max, double min, String label) {
         super(id);
         
+        this.max.set(max);
+        this.min.set(min);
+        
         linear = new Linear();
-        linear.minValueProperty().bind(min);
-        linear.maxValueProperty().bind(max);
+        linear.minValueProperty().bind(this.min);
+        linear.maxValueProperty().bind(this.max);
         linear.valueProperty().bind(value);
         addGauge(linear);
         
     }
 
+    @Override
+    public void update(JSONObject obj)
+    {
+        double val = (double)obj.get("value");
+        value.set(val);
+    }
+    
     @Override
     protected void configureGauge() {
         linear.setTitle("Default");
