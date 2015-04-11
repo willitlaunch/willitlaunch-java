@@ -11,12 +11,14 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import willitlaunch.messaging.MessageManager;
 
 
@@ -33,7 +35,7 @@ public class LoadScreenController implements Initializable {
     private Button connect;
     
     @FXML
-    private Pane logoPane;
+    private StackPane logoPane;
     
     @FXML
     private void connectTo(ActionEvent event) {
@@ -42,12 +44,12 @@ public class LoadScreenController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//       Image img = new Image(getClass().getResourceAsStream("/rocket.png"),200,200,false,false);
-//       
-////        ImageView imgView = new ImageView(img);
-//        ImageView iv = new ImageView(img);
-//               
-//        logoPane.getChildren().add(iv);
+       Image img = new Image(getClass().getResourceAsStream("/rocketw.png"),600/3,971/3,false,false);
+       
+//        ImageView imgView = new ImageView(img);
+        ImageView iv = new ImageView(img);
+        StackPane.setAlignment(iv, Pos.CENTER);
+        logoPane.getChildren().add(iv);
 
     }    
     
