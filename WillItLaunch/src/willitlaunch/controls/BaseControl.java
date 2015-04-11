@@ -6,10 +6,21 @@
 
 package willitlaunch.controls;
 
+import javafx.scene.layout.Region;
+
 /**
  *
  * @author ben
  */
-public interface IControl {
+public abstract class BaseControl {
     
+    private Region region;
+    
+    public abstract void create();
+    public abstract void redraw();  
+    
+    public Region getRegion()
+    {
+        return region;
+    }
 }

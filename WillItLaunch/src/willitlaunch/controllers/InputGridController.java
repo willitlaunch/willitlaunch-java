@@ -5,6 +5,8 @@
  */
 package willitlaunch.controllers;
 
+import willitlaunch.controls.outputs.HorizontalBarControl;
+
 /**
  *
  * @author Tom
@@ -16,7 +18,12 @@ public class InputGridController {
     
     public void createInputWidget(InputType type, int row, int column)
     {
-        throw new NotSupportedException();
+        HorizontalBarControl wig = new HorizontalBarControl();
+        
+        
+        
+        
+        
     }
     
     
