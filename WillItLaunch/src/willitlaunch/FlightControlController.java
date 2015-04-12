@@ -69,8 +69,6 @@ public class FlightControlController implements Initializable {
     @FXML
     private AnchorPane timeLabel;
     @FXML
-    private Button goButton;
-    @FXML
     private GridPane gaugesGrid;
     @FXML
     private GridPane controlsGrid;
@@ -93,8 +91,7 @@ public class FlightControlController implements Initializable {
         controllerTitle.textProperty().bind(title);
         msg.listen(); 
         setUpTimeCounterAsClock();
-        goButton.setOnMousePressed(o -> enablePollMode());
-        goButton.setOnMouseReleased(o -> disablePollMode());
+      
     }   
     
     private void setUpTimeCounterAsClock(){
