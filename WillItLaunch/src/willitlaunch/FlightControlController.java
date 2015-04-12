@@ -15,6 +15,7 @@ import eu.hansolo.enzo.gauge.RadialBargraph;
 import eu.hansolo.enzo.gauge.RadialSteelGauge;
 import eu.hansolo.enzo.gauge.SimpleGauge;
 import eu.hansolo.enzo.sevensegment.SevenSegment;
+import java.net.URI;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -45,6 +46,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javax.swing.SwingUtilities;
 import org.json.JSONObject;
@@ -95,6 +98,7 @@ public class FlightControlController implements Initializable {
         setUpTimeCounterAsClock();
         goButton.setOnMousePressed(o -> enablePollMode());
         goButton.setOnMouseReleased(o -> disablePollMode());
+        playSound("");
     }   
     
     private void setUpTimeCounterAsClock(){
@@ -240,6 +244,21 @@ public class FlightControlController implements Initializable {
                        "-section1-fill: rgb(0, 255,   0);" +
                        "-section2-fill: rgb(0,   0,   255);");
 
+    }
+    
+    public void playSound(String file)
+    {
+        try
+        {       
+            String bip = "file://sounds/Go1.wav";
+            Media hit = new Media(new URI(bip).toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            mediaPlayer.play();
+        }
+        catch(Exception e) 
+        {
+            System.out.println(e.getMessage());
+        }
     }
     
     public void showGoNoGo(){
