@@ -46,9 +46,10 @@ public class DialGauge extends GaugeBase {
     protected final void configureGauge() {
         
         //linear.setUnit("");
-        linear.setSections(new Section(0, 60),
-                          new Section(60, 120),
-                          new Section(120, 200));
+        double diff = max.get() - min.get();
+        linear.setSections(new Section(min.get(), diff/3),
+                          new Section(diff/3, diff*2/3),
+                          new Section(diff*2/3, max.get()));
         linear.setStyle("-needle       : rgb(  0,   0, 255);" +
                        "-section0-fill: rgb(0, 255,   0);" +
                        "-section1-fill: rgb(0, 255,   0);" +

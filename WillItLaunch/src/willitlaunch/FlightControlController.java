@@ -30,6 +30,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -65,7 +67,7 @@ public class FlightControlController implements Initializable {
     @FXML
     private AnchorPane mainWindow;
     @FXML
-    public ListView<?> checkList;
+    public ListView<String> checkList;
     @FXML
     private AnchorPane timeLabel;
     @FXML
@@ -77,6 +79,7 @@ public class FlightControlController implements Initializable {
     @FXML
     private StackPane stackPane;
 
+    public ObservableList<String> rules = FXCollections.observableArrayList();
     public HashMap<Integer,GaugeBase> outputGaugeMap = new HashMap<Integer,GaugeBase>();
     public HashMap<Integer,ControlBase> outputControlMap = new HashMap<Integer,ControlBase>();
     public StringProperty title = new SimpleStringProperty();
@@ -91,7 +94,7 @@ public class FlightControlController implements Initializable {
         controllerTitle.textProperty().bind(title);
         msg.listen(); 
         setUpTimeCounterAsClock();
-      
+        checkList.setItems(rules);
     }   
     
     private void setUpTimeCounterAsClock(){
@@ -99,7 +102,8 @@ public class FlightControlController implements Initializable {
         timeCounter.timeProperty().bind(timeLeft);
         timeCounter.setSecondPointerVisible(true);
         timeCounter.setDesign(Clock.Design.DB);
-    
+        timeCounter.setOnMousePressed(event -> enablePollMode());
+        timeCounter.setOnMouseReleased(event -> disablePollMode());
         gaugesGrid.setStyle("-fx-background-color:#404040;");
         controlsGrid.setStyle("-fx-background-color:#252525;");
         

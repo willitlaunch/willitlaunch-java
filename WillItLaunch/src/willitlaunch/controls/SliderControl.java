@@ -43,7 +43,7 @@ public class SliderControl extends ControlBase {
         super(id);
         this.max.set(max);
         this.min.set(min);
-                  
+        name.set(label);
         slider.minProperty().bind(this.min);
         slider.maxProperty().bind(this.max);
         value.bind(slider.valueProperty());

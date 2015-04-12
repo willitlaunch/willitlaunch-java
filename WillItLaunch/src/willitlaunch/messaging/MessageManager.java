@@ -123,10 +123,11 @@ public class MessageManager {
         if (!obj.keySet().contains("objectiveList")) return;
         JSONArray widgetList = obj.getJSONArray("objectiveList");
         fcc.checkList.getItems().clear();
+        fcc.rules.clear();
         for(int i=0;i<widgetList.length();i++)
         {
             JSONObject widget = widgetList.getJSONObject(i);
-            //fcc.checkList.getItems().add(widget.toString());
+            fcc.rules.add(widget.toString());
         }             
     }
     
