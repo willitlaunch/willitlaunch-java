@@ -12,7 +12,7 @@ package willitlaunch.gauges;
 public enum GaugeType {
     dial,
     bool,
-    bars,
+    bar,
     bools,
     map
 }
