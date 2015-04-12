@@ -49,6 +49,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javax.sound.sampled.Clip;
 import javax.swing.SwingUtilities;
 import org.json.JSONObject;
 import willitlaunch.controls.ButtonControl;
@@ -72,8 +73,6 @@ public class FlightControlController implements Initializable {
     @FXML
     private AnchorPane timeLabel;
     @FXML
-    private Button goButton;
-    @FXML
     private GridPane gaugesGrid;
     @FXML
     private GridPane controlsGrid;
@@ -96,9 +95,6 @@ public class FlightControlController implements Initializable {
         controllerTitle.textProperty().bind(title);
         msg.listen(); 
         setUpTimeCounterAsClock();
-        goButton.setOnMousePressed(o -> enablePollMode());
-        goButton.setOnMouseReleased(o -> disablePollMode());
-        playSound("");
     }   
     
     private void setUpTimeCounterAsClock(){

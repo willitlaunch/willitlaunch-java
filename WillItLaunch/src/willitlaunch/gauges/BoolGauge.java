@@ -56,7 +56,7 @@ public class BoolGauge extends GaugeBase {
     @Override
     public void update(JSONObject obj)
     {
-        boolean val = (boolean)obj.get("value");
+        boolean val = (boolean)obj.get("Value");
         value.set(val);
     }
     
