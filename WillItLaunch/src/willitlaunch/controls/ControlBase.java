@@ -49,8 +49,7 @@ public abstract class ControlBase extends StackPane {
         StackPane.setAlignment(title, Pos.TOP_CENTER);
        
         title.setTextAlignment(TextAlignment.CENTER);
-        title.setAlignment(Pos.CENTER);
-        
+        title.setAlignment(Pos.CENTER);             
     }
     
     public abstract void setOnChangedEvent(EventHandler<? super MouseEvent> event);
@@ -67,14 +66,12 @@ public abstract class ControlBase extends StackPane {
         region.toFront();
     }
     
-    
-    public static ControlBase createControl(JSONObject obj)
-    {
+    public static ControlBase createControl(JSONObject obj)    {
         int id = (int)obj.get("Wid") + ((int)obj.get("Gid")*100);
         ControlType type = Enum.valueOf(ControlType.class, obj.get("Style").toString());
         String label = obj.get("Label").toString();
         if (type == ControlType.button) return new ButtonControl(id, label);
-
+        
 //        if (type == OutputType.dial) return new DialControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
 //        if (type == OutputType.bars) return new BoolControl(id, label);
         return null;

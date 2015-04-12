@@ -9,36 +9,29 @@ package willitlaunch.controls;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import org.json.JSONObject;
-import willitlaunch.messaging.MessageManager;
 
 /**
  *
  * @author ben
  */
-public class ButtonControl extends ControlBase {
-    Button button = new Button();
+public class SliderControl extends ControlBase {
+    Slider slider = new Slider();
     
-    public ButtonControl (int id, String label){
+    public SliderControl (int id, String label){
         super(id);
-        value = false;
         this.setBackground(new Background(new BackgroundFill(Color.YELLOW, null, null)));
-        //this.setMinSize(100, 100);       
-        button.textProperty().set(label);
-        addControl(button);
+        //this.setMinSize(100, 100);
         
-        button.setOnMousePressed(o -> {
-            value = true;
-            MessageManager.get().sendUpdatedValue(this);
-                });
-        button.setOnMouseReleased(o -> {
-            value = false;
-            MessageManager.get().sendUpdatedValue(this);
-                });     
+        //slider.textProperty().set(label);
+        addControl(slider);
+        updated = slider.pressedProperty().asObject();
+        
     }
     
     
@@ -60,12 +53,12 @@ public class ButtonControl extends ControlBase {
 
     @Override
     public Object getValue() {
-       return value;
+       return true;
     }
 
     @Override
     public void setOnChangedEvent(EventHandler<? super MouseEvent> event) {
-       //button.setOnMousePressed(event);
+       slider.setOnMousePressed(event);
     }
     
 }

@@ -22,6 +22,8 @@ public class WillItLaunch extends Application {
     
     private static Stage stage = null;
     
+    public static String url;
+    
     public static void load(Screen screenType){
         try {
           

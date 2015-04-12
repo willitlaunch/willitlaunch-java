@@ -54,11 +54,11 @@ import willitlaunch.messaging.MessageManager;
  * @author ben
  */
 public class FlightControlController implements Initializable {
-    MessageManager msg = new MessageManager(this);
+    MessageManager msg = new MessageManager(this, WillItLaunch.url);
     @FXML
     private AnchorPane mainWindow;
     @FXML
-    private ListView<?> checkList;
+    public ListView<?> checkList;
     @FXML
     private AnchorPane timeLabel;
     @FXML
@@ -96,17 +96,27 @@ public class FlightControlController implements Initializable {
         AnchorPaneUtils.setAnchors(timeCounter, 0.0, 0.0, 0.0, 0.0);
     }
         
+    public void setName(String name)
+    {
+        Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        title.set(name);
+                    }
+                });
+    }
+    
     public void createGauge(GaugeBase gauge){
         outputGaugeMap.put(gauge.id, gauge);
-        int row = (int)Math.floor(outputGaugeMap.keySet().size()/4.0);
-        int col = outputGaugeMap.keySet().size() % 4;
+        int tid = outputGaugeMap.keySet().size() - 1;
+        int row = (int)Math.floor(tid/4.0);
+        int col = tid % 4;
          Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
                         createGauge(gauge, row, col);
                     }
-                });
-        
+                });     
     }    
     
     public void createGauge(GaugeBase gauge,int row,int col){
@@ -122,16 +132,50 @@ public class FlightControlController implements Initializable {
     
     public void createControl(ControlBase control){
         outputControlMap.put(control.id, control);
-        int row = (int)Math.floor(outputControlMap.keySet().size()/4.0);
-        int col = outputControlMap.keySet().size() % 4;
+        int tid = outputControlMap.keySet().size() - 1;
+        int row = (int)Math.floor(tid/4.0);
+        int col = tid % 4;
          Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
                         createControl(control, row, col);
                     }
-                });
-        
-    }    
+                });   
+    }  
+    
+    public void hideControls()
+    {
+        Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                          controlsGrid.getChildren().clear();
+                    }
+                });   
+      
+    }
+    
+    public void showControls()
+    {
+        Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        outputControlMap.keySet().forEach(id -> {
+                            ControlBase control = outputControlMap.get(id);
+                            gaugesGrid.getChildren().add(control);                            
+                        });
+                    }
+                });        
+    } 
+    
+    public void enablePollMode()
+    {
+        hideControls();     
+    }
+    
+    public void disablePollMode()
+    {
+        showControls();
+    }
     
     public void createControl(ControlBase control,int row,int col){
         try{
@@ -144,10 +188,19 @@ public class FlightControlController implements Initializable {
         }
     }
     
-    public void updateGauge(int id, JSONObject object)
-    {
+    public void updateGauge(int id, JSONObject object){
         GaugeBase widget = outputGaugeMap.get(id);
         if (widget != null) widget.update(object);      
+    }
+    
+    public void updateClock(int value)
+    {
+                 Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                         timeLeft.set(LocalTime.of(1, 1, value));
+                    }
+                });  
     }
     
     private void setGaugeDefaults(Region gauge) {

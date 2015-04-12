@@ -55,6 +55,7 @@ public class LoadScreenController implements Initializable {
     
     private boolean connectToServer(String ip){
         if (ip != ""){
+            WillItLaunch.url = ip;
             WillItLaunch.load(Screen.FlightControl);
         }
         return false;
