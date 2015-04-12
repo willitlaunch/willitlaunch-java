@@ -76,7 +76,10 @@ public class MessageManager {
             JSONObject widget = widgetList.getJSONObject(i);
             ControlBase wid = ControlBase.createControl(widget);
             if (wid != null) {
-                wid.updated.addListener(o -> sendUpdatedValue(wid));
+                wid.setOnChangedEvent(o -> sendUpdatedValue(wid));
+              //  wid.updated.addListener(o -> {
+              //      sendUpdatedValue(wid);
+              //  });
                 fcc.createControl(wid);
             }
         } 
@@ -91,12 +94,13 @@ public class MessageManager {
     {
         JSONObject json = new JSONObject();
         int wid = obj.id % 100;
-        int gid = (int)Math.round(obj.id - wid / 100.0);
+        int gid = (int)Math.round((obj.id - wid) / 100.0);
          
-        json.append("Wid", wid);
-        json.append("Gid", gid);
-        json.append("Value", obj);
-        wsc.send(json.toString());
+        json.put("Wid", wid);
+        json.put("Gid", gid);
+        json.put("Value", obj.getValue());
+        String jsonString = json.toString();
+        wsc.send(jsonString);
     }
 }
 

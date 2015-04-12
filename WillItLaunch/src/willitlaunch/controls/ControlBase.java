@@ -9,11 +9,15 @@ package willitlaunch.controls;
 import Utils.AnchorPaneUtils;
 import java.util.Random;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
@@ -34,10 +38,11 @@ public abstract class ControlBase extends StackPane {
     public StringProperty name = new SimpleStringProperty();
     public Label title = new Label();
     public Object value;
-    public ReadOnlyObjectProperty<?> updated;
+    public ReadOnlyObjectProperty<?> updated = new SimpleObjectProperty<>();
     
     
     public ControlBase(int id){
+        this.id = id;
         title.getStyleClass().add("item-title");
         title.textProperty().bind(name);
         this.getChildren().add(title);
@@ -48,14 +53,18 @@ public abstract class ControlBase extends StackPane {
         
     }
     
+    public abstract void setOnChangedEvent(EventHandler<? super MouseEvent> event);
+    
+    public abstract Object getValue();
+    
     protected abstract void configureGauge();
     
     protected void addControl(Region region){
-        AnchorPaneUtils.setAnchors(region, 0.0, null, 0.0, null);
+        //AnchorPaneUtils.setAnchors(region, 0.0, null, 0.0, null);
         this.getChildren().add(region);
         //region.setPadding(new Insets(0));
-        StackPane.setAlignment(region, Pos.BOTTOM_CENTER);
-        region.toBack();
+        StackPane.setAlignment(region, Pos.CENTER);
+        region.toFront();
     }
     
     

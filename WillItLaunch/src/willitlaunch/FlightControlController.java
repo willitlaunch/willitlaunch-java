@@ -33,6 +33,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javax.swing.SwingUtilities;
 import org.json.JSONObject;
+import willitlaunch.controls.ButtonControl;
 import willitlaunch.controls.ControlBase;
 import willitlaunch.gauges.BarsGauge;
 import willitlaunch.gauges.GaugeBase;
@@ -71,7 +72,7 @@ public class FlightControlController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         controllerTitle.textProperty().bind(title);
-        msg.listen();   
+        msg.listen();  
     }   
     
     public void runGauges(){

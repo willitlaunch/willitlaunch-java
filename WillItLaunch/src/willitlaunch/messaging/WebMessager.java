@@ -22,7 +22,7 @@ public class WebMessager extends WebSocketClient{
     public WebMessager(URI serverURI, MessageManager msg) {
         super(serverURI, new Draft_17());
         this.msg = msg;
-        WebSocketImpl.DEBUG = true;
+        WebSocketImpl.DEBUG = false;
     }
 
             @Override
@@ -33,10 +33,10 @@ public class WebMessager extends WebSocketClient{
             
             @Override
             public void onMessage(String string) {
-                System.out.println("---- begin ----"); 
-                System.out.println(string);
+               // System.out.println("---- begin ----"); 
+                //System.out.println(string);
                 msg.convertMessageToData(string);
-                System.out.println("--- end ----"); 
+                //System.out.println("--- end ----"); 
             } 
             
             @Override
