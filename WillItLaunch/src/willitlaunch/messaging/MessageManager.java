@@ -107,6 +107,7 @@ public class MessageManager {
         for(int i=0;i<widgetList.length();i++)
         {
             JSONObject widget = widgetList.getJSONObject(i);
+            if ((int)widget.getDouble("Wid") == 99 && (int)widget.getDouble("Gid") == 99) continue;
             ControlBase wid = ControlBase.createControl(widget);
             if (wid != null) {
                 wid.setOnChangedEvent(o -> sendUpdatedValue(wid));
