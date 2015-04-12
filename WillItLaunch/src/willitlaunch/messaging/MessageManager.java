@@ -66,6 +66,13 @@ public class MessageManager {
     
     public void createInputControlsFromMessage(JSONObject obj)
     {
+        JSONArray widgetList = obj.getJSONArray("inputWidgets");
+        for(int i=0;i<widgetList.length();i++)
+        {
+            JSONObject widget = widgetList.getJSONObject(i);
+            ControlBase wid = ControlBase.createControl(widget);
+            if (wid != null) fcc.createControl(wid);
+        } 
     }
     
     public void createObjectiveListFromMessage(JSONObject obj)

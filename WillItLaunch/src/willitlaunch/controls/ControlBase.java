@@ -28,6 +28,7 @@ import willitlaunch.gauges.GaugeType;
  */
 public abstract class ControlBase extends StackPane {
     public static Random rand = new Random();
+    //private static Object ControlType;
     public int id = rand.nextInt();
     public StringProperty name = new SimpleStringProperty();
     public Label title = new Label();
@@ -59,9 +60,9 @@ public abstract class ControlBase extends StackPane {
     public static ControlBase createControl(JSONObject obj)
     {
         int id = (int)obj.get("id");
-        GaugeType type = Enum.valueOf(GaugeType.class, obj.get("type").toString());
+        ControlType type = Enum.valueOf(ControlType.class, obj.get("type").toString());
         String label = obj.get("label").toString();
-//        if (type == OutputType.bars) return new BarsControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
+        if (type == ControlType.button) return new ButtonControl(id, label);
 //        if (type == OutputType.dial) return new DialControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
 //        if (type == OutputType.bars) return new BoolControl(id, label);
         return null;

@@ -33,6 +33,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javax.swing.SwingUtilities;
 import org.json.JSONObject;
+import willitlaunch.controls.ControlBase;
 import willitlaunch.gauges.BarsGauge;
 import willitlaunch.gauges.GaugeBase;
 import willitlaunch.gauges.DialGauge;
@@ -60,7 +61,8 @@ public class FlightControlController implements Initializable {
     @FXML
     private Label controllerTitle;
 
-    public HashMap<Integer,GaugeBase> outputControlMap = new HashMap<Integer,GaugeBase>();
+    public HashMap<Integer,GaugeBase> outputGaugeMap = new HashMap<Integer,GaugeBase>();
+    public HashMap<Integer,ControlBase> outputControlMap = new HashMap<Integer,ControlBase>();
     public StringProperty title = new SimpleStringProperty();
     private DoubleProperty gaugeValue = new SimpleDoubleProperty(0.0);
     /**
@@ -91,9 +93,9 @@ public class FlightControlController implements Initializable {
     
         
     public void createGauge(GaugeBase gauge){
-        outputControlMap.put(gauge.id, gauge);
-        int row = (int)Math.floor(outputControlMap.keySet().size()/4.0);
-        int col = outputControlMap.keySet().size() % 4;
+        outputGaugeMap.put(gauge.id, gauge);
+        int row = (int)Math.floor(outputGaugeMap.keySet().size()/4.0);
+        int col = outputGaugeMap.keySet().size() % 4;
          Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -108,17 +110,39 @@ public class FlightControlController implements Initializable {
         setGaugeDefaults(gauge);
         GridPane.setConstraints(gauge, col, row);
         gaugesGrid.getChildren().add(gauge);
-
         }
-        catch(Exception e)
-        {
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void createControl(ControlBase control){
+        outputControlMap.put(control.id, control);
+        int row = (int)Math.floor(outputControlMap.keySet().size()/4.0);
+        int col = outputControlMap.keySet().size() % 4;
+         Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        createControl(control, row, col);
+                    }
+                });
+        
+    }    
+    
+    public void createControl(ControlBase control,int row,int col){
+        try{
+            setControlDefaults(control);
+            GridPane.setConstraints(control, col, row);
+            controlsGrid.getChildren().add(control);
+        }
+        catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
     
     public void updateGauge(int id, JSONObject object)
     {
-        GaugeBase widget = outputControlMap.get(id);
+        GaugeBase widget = outputGaugeMap.get(id);
         widget.update(object);      
     }
     
@@ -131,6 +155,21 @@ public class FlightControlController implements Initializable {
 //                      new Section(140, 176),
 //                      new Section(176, 212));
         gauge.setStyle("-needle       : rgb(  0,   0, 255);" +
+                       "-section0-fill: rgb(255, 0,   0);" +
+                       "-section1-fill: rgb(0, 255,   0);" +
+                       "-section2-fill: rgb(0,   0,   255);");
+
+    }
+    
+    private void setControlDefaults(Region control) {
+//    gauge.setTitle("Default");
+//    gauge.setUnit("°F");
+//    gauge.setMinValue(32);
+//    gauge.setMaxValue(212);
+//    gauge.setSections(new Section(104, 140),
+//                      new Section(140, 176),
+//                      new Section(176, 212));
+        control.setStyle("-needle       : rgb(  0,   0, 255);" +
                        "-section0-fill: rgb(255, 0,   0);" +
                        "-section1-fill: rgb(0, 255,   0);" +
                        "-section2-fill: rgb(0,   0,   255);");
