@@ -33,9 +33,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javax.swing.SwingUtilities;
 import org.json.JSONObject;
-import willitlaunch.controls.BarsControl;
-import willitlaunch.controls.ControlBase;
-import willitlaunch.controls.DialControl;
+import willitlaunch.gauges.BarsGauge;
+import willitlaunch.gauges.GaugeBase;
+import willitlaunch.gauges.DialGauge;
 import willitlaunch.messaging.MessageManager;
 
 /**
@@ -60,7 +60,7 @@ public class FlightControlController implements Initializable {
     @FXML
     private Label controllerTitle;
 
-    public HashMap<Integer,ControlBase> outputControlMap = new HashMap<Integer,ControlBase>();
+    public HashMap<Integer,GaugeBase> outputControlMap = new HashMap<Integer,GaugeBase>();
     public StringProperty title = new SimpleStringProperty();
     private DoubleProperty gaugeValue = new SimpleDoubleProperty(0.0);
     /**
@@ -90,7 +90,7 @@ public class FlightControlController implements Initializable {
     }
     
         
-    public void createGauge(ControlBase gauge){
+    public void createGauge(GaugeBase gauge){
         outputControlMap.put(gauge.id, gauge);
         int row = (int)Math.floor(outputControlMap.keySet().size()/4.0);
         int col = outputControlMap.keySet().size() % 4;
@@ -103,7 +103,7 @@ public class FlightControlController implements Initializable {
         
     }    
     
-    public void createGauge(ControlBase gauge,int row,int col){
+    public void createGauge(GaugeBase gauge,int row,int col){
         try{
         setGaugeDefaults(gauge);
         GridPane.setConstraints(gauge, col, row);
@@ -118,7 +118,7 @@ public class FlightControlController implements Initializable {
     
     public void updateGauge(int id, JSONObject object)
     {
-        ControlBase widget = outputControlMap.get(id);
+        GaugeBase widget = outputControlMap.get(id);
         widget.update(object);      
     }
     

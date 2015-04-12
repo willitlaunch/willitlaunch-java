@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package willitlaunch.controls;
+package willitlaunch.gauges;
 
 import eu.hansolo.enzo.common.Section;
 import eu.hansolo.enzo.gauge.Gauge;
@@ -27,12 +27,12 @@ import org.json.JSONObject;
  *
  * @author ben
  */
-public class BoolControl extends ControlBase {
+public class BoolGauge extends GaugeBase {
     public BooleanProperty value = new SimpleBooleanProperty(true);
     public ObjectProperty<IndicatorStyle> style = new SimpleObjectProperty<IndicatorStyle>(IndicatorStyle.RED);
      
     SimpleIndicator linear;
-    public BoolControl(int id) {
+    public BoolGauge(int id) {
         super(id);
         linear = new SimpleIndicator();
         linear.onProperty().bind(value);
@@ -42,7 +42,7 @@ public class BoolControl extends ControlBase {
         this.setPadding(new Insets(50));
     }
 
-    BoolControl(int id, String label) {
+    BoolGauge(int id, String label) {
         this(id); 
         this.name.set(label);
     }

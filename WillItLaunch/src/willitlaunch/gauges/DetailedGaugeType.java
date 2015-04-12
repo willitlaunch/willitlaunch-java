@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 
-package willitlaunch.controls;
+package willitlaunch.gauges;
 
 /**
  *
  * @author ben
  */
-public enum GaugeType {
+public enum DetailedGaugeType {
     Temperature,
     HeartRate,
     Percentage,

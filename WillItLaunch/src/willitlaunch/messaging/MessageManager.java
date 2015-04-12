@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import willitlaunch.FlightControlController;
 import willitlaunch.controls.ControlBase;
+import willitlaunch.gauges.GaugeBase;
 
 public class MessageManager { 
     FlightControlController fcc; 
@@ -58,7 +59,7 @@ public class MessageManager {
         for(int i=0;i<widgetList.length();i++)
         {
             JSONObject widget = widgetList.getJSONObject(i);
-            ControlBase wid = ControlBase.createControl(widget);
+            GaugeBase wid = GaugeBase.createControl(widget);
             if (wid != null) fcc.createGauge(wid);
         }    
     }
@@ -89,6 +90,18 @@ public class MessageManager {
                       
             }
         }
+    }
+    
+    public void sendUpdatedValue(ControlBase obj)
+    {
+        JSONObject json = new JSONObject();
+        int wid = obj.id % 100;
+        int gid = (int)Math.round(obj.id - wid / 100.0);
+         
+        json.append("wid", wid);
+        json.append("gid", gid);
+        json.append("value", obj);
+        wsc.send(json.toString());
     }
 }
 

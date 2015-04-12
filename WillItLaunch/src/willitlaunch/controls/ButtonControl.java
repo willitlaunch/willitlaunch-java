@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package willitlaunch.gauges;
+package willitlaunch.controls;
 
 import org.json.JSONObject;
 
@@ -12,7 +12,7 @@ import org.json.JSONObject;
  *
  * @author ben
  */
-public class ButtonControl extends GaugeBase {
+public class ButtonControl extends ControlBase {
     
     public ButtonControl (int id, String label){
         super(id);
