@@ -10,6 +10,7 @@ import eu.hansolo.enzo.common.Section;
 import eu.hansolo.enzo.gauge.Gauge;
 import eu.hansolo.enzo.gauge.Linear;
 import eu.hansolo.enzo.gauge.SimpleGauge;
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.GridPane;
@@ -59,7 +60,13 @@ public class DialGauge extends GaugeBase {
     public void update(JSONObject obj)
     {
         double val = (double)obj.getDouble("Value");
-        value.set(val);
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                value.set(val);
+            }
+        });
+        
     }
     
     

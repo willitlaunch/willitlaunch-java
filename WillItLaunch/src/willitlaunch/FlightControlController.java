@@ -93,6 +93,8 @@ public class FlightControlController implements Initializable {
         controllerTitle.textProperty().bind(title);
         msg.listen(); 
         setUpTimeCounterAsClock();
+        goButton.setOnMousePressed(o -> enablePollMode());
+        goButton.setOnMouseReleased(o -> disablePollMode());
     }   
     
     private void setUpTimeCounterAsClock(){
@@ -240,16 +242,18 @@ public class FlightControlController implements Initializable {
     }
     
     public void showGoNoGo(){
-        goNogoPane.setPrefSize(3000,2000);
-        Button go = new Button();
-        Button no = new Button();
+        goNogoPane.getChildren().clear();
+        goNogoPane.setPrefSize(3000,300);
+        Button go = new Button("Go");
+        Button no = new Button("No Go");
         go.setPrefSize(1500, 300);
-        go.setPrefSize(1500,300);
-        go.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-        no.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        no.setPrefSize(1500, 300);
         goNogoPane.getChildren().addAll(go,no);
         stackPane.getChildren().add(goNogoPane);
         goNogoPane.toFront();
+        go.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+        no.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+
         
     }
     
