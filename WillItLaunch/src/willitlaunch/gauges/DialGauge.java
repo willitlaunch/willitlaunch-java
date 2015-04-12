@@ -36,11 +36,12 @@ public class DialGauge extends GaugeBase {
         linear.maxValueProperty().bind(this.max);
         linear.valueProperty().bind(value);
         addGauge(linear);
+        this.configureGauge();
         
     }
 
     @Override
-    protected void configureGauge() {
+    protected final void configureGauge() {
         linear.setTitle("Default");
         linear.setUnit("°C");
         linear.setSections(new Section(104, 140),

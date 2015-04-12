@@ -6,6 +6,7 @@
 
 package willitlaunch;
 
+import eu.hansolo.enzo.common.Section;
 import eu.hansolo.enzo.gauge.Gauge;
 import eu.hansolo.enzo.gauge.Linear;
 import eu.hansolo.enzo.gauge.RadialBargraph;
@@ -36,8 +37,8 @@ import org.json.JSONObject;
 import willitlaunch.controls.ButtonControl;
 import willitlaunch.controls.ControlBase;
 import willitlaunch.gauges.BarsGauge;
-import willitlaunch.gauges.GaugeBase;
 import willitlaunch.gauges.DialGauge;
+import willitlaunch.gauges.GaugeBase;
 import willitlaunch.messaging.MessageManager;
 
 /**
@@ -74,23 +75,6 @@ public class FlightControlController implements Initializable {
         controllerTitle.textProperty().bind(title);
         msg.listen();  
     }   
-    
-    public void runGauges(){
-        Random rand = new Random();
-        int i = 0;
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        gaugeValue.set(rand.nextDouble()*100);
-                    }
-                });
-            }
-        }, 0, 2000);
-    }
     
         
     public void createGauge(GaugeBase gauge){
@@ -152,13 +136,7 @@ public class FlightControlController implements Initializable {
 //    gauge.setUnit("°F");
 //    gauge.setMinValue(32);
 //    gauge.setMaxValue(212);
-//    gauge.setSections(new Section(104, 140),
-//                      new Section(140, 176),
-//                      new Section(176, 212));
-        gauge.setStyle("-needle       : rgb(  0,   0, 255);" +
-                       "-section0-fill: rgb(255, 0,   0);" +
-                       "-section1-fill: rgb(0, 255,   0);" +
-                       "-section2-fill: rgb(0,   0,   255);");
+        
 
     }
     
