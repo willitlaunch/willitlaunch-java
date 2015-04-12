@@ -39,7 +39,6 @@ public abstract class GaugeBase extends StackPane{
         title.textProperty().bind(name);
         this.getChildren().add(title);
         StackPane.setAlignment(title, Pos.TOP_CENTER);
-        this.setStyle("-fx-background-color:#505050;-fx-margin:5");
         title.setTextAlignment(TextAlignment.CENTER);
         title.setAlignment(Pos.CENTER);     
     }
