@@ -39,7 +39,7 @@ public class BarsGauge extends GaugeBase {
     @Override
     public void update(JSONObject obj)
     {
-        double val = (double)obj.get("value");
+        double val = obj.getDouble("Value");
         value.set(val);
     }
     
