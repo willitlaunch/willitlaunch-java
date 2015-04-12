@@ -71,7 +71,10 @@ public class MessageManager {
         {
             JSONObject widget = widgetList.getJSONObject(i);
             ControlBase wid = ControlBase.createControl(widget);
-            if (wid != null) fcc.createControl(wid);
+            if (wid != null) {
+                wid.updated.addListener(o -> sendUpdatedValue(wid));
+                fcc.createControl(wid);
+            }
         } 
     }
     

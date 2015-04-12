@@ -13,4 +13,6 @@ public enum GaugeType {
     dial,
     bool,
     bars,
+    bools,
+    map
 }
