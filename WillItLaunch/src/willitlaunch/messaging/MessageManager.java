@@ -48,6 +48,7 @@ public class MessageManager {
         System.out.println(obj.toString());
         updateName(obj);
         updateStatus(obj);
+        updatePOLLCON(obj);
         updateOutputControlsFromMessage(obj);
         updateInputControlsFromMessage(obj);
         updateObjectiveListFromMessage(obj);
@@ -71,6 +72,14 @@ public class MessageManager {
     {
         if (!obj.keySet().contains("name")) return;
         fcc.setName(obj.get("name").toString());
+    }
+    
+    public void updatePOLLCON(JSONObject obj)
+    {
+        if (!obj.keySet().contains("POLLCONT")) return;
+        JSONObject polcon = obj.getJSONObject("POLLCONT");
+        String name = polcon.get("ControllerName").toString();
+        fcc.setName(name);
     }
     
     public void updateTimeLeft(JSONObject obj)
