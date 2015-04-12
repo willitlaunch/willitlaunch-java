@@ -23,6 +23,7 @@ public class MessageManager {
     Socket socket;
     boolean isFirstMessage = true;
     public final String url = "ws://intense-woodland-5574.herokuapp.com/ws";
+    public final String url2 = "ws://192.168.137.158:8080/ws";
     
     public MessageManager(FlightControlController fcc)
     {
@@ -32,7 +33,7 @@ public class MessageManager {
     public void listen()
     {
         URI uri;
-        try { uri = new URI(url); } catch (Exception e) { return; }      
+        try { uri = new URI(url2); } catch (Exception e) { return; }      
         wsc = new WebMessager(uri, this);
         wsc.connect();
     }
@@ -40,32 +41,35 @@ public class MessageManager {
     public void convertMessageToData(String message)
     {
         JSONObject obj = new JSONObject(message);
-        if (isFirstMessage)
-        {
-            isFirstMessage = false;
-            createOutputControlsFromMessage(obj);
-            createInputControlsFromMessage(obj);
-            createObjectiveListFromMessage(obj);
-        }
-        else
-        {
-            updateOutputControlsFromMessage(obj);
-        }
+
+        isFirstMessage = false;
+        updateOutputControlsFromMessage(obj);
+        updateInputControlsFromMessage(obj);
+        updateObjectiveListFromMessage(obj);
     }
     
-    public void createOutputControlsFromMessage(JSONObject obj)
+    public void updateOutputControlsFromMessage(JSONObject obj)
     {
+        if (!obj.keySet().contains("outputWidgets")) return;
         JSONArray widgetList = obj.getJSONArray("outputWidgets");
         for(int i=0;i<widgetList.length();i++)
         {
             JSONObject widget = widgetList.getJSONObject(i);
-            GaugeBase wid = GaugeBase.createControl(widget);
-            if (wid != null) fcc.createGauge(wid);
-        }    
+            int wid = (int)widget.get("Wid");
+            int gid = (int)widget.get("Gid");
+            int id = wid + gid*100;
+            if (!fcc.outputGaugeMap.keySet().contains(id))
+            {                                    
+                GaugeBase gaugeBase = GaugeBase.createGauge(widget);
+                if (gaugeBase != null) fcc.createGauge(gaugeBase);
+            }
+            fcc.updateGauge(wid+(gid*100), widget);
+        }   
     }
     
-    public void createInputControlsFromMessage(JSONObject obj)
-    {
+    public void updateInputControlsFromMessage(JSONObject obj)
+    {    
+        if (!obj.keySet().contains("inputWidgets")) return;
         JSONArray widgetList = obj.getJSONArray("inputWidgets");
         for(int i=0;i<widgetList.length();i++)
         {
@@ -78,29 +82,10 @@ public class MessageManager {
         } 
     }
     
-    public void createObjectiveListFromMessage(JSONObject obj)
+    public void updateObjectiveListFromMessage(JSONObject obj)
     {
     }
     
-    public void updateOutputControlsFromMessage(JSONObject obj)
-    {
-        JSONArray widgetList = obj.getJSONArray("outputWidgets");
-        for(int i=0;i<widgetList.length();i++)
-        {
-            try
-            {
-            JSONObject widget = widgetList.getJSONObject(i);
-            int wid = (int)widget.get("wid");
-            int gid = (int)widget.get("gid");
-            fcc.updateGauge(wid+(gid*100), widget);
-            }
-            catch(Exception e)
-            {
-                System.out.println("");
-                      
-            }
-        }
-    }
     
     public void sendUpdatedValue(ControlBase obj)
     {
@@ -108,9 +93,9 @@ public class MessageManager {
         int wid = obj.id % 100;
         int gid = (int)Math.round(obj.id - wid / 100.0);
          
-        json.append("wid", wid);
-        json.append("gid", gid);
-        json.append("value", obj);
+        json.append("Wid", wid);
+        json.append("Gid", gid);
+        json.append("Value", obj);
         wsc.send(json.toString());
     }
 }

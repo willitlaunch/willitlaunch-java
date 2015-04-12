@@ -56,7 +56,7 @@ public class DialGauge extends GaugeBase {
     @Override
     public void update(JSONObject obj)
     {
-        double val = (double)obj.get("value");
+        double val = (double)obj.getDouble("Value");
         value.set(val);
     }
     

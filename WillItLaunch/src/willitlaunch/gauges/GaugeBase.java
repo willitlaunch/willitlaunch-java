@@ -56,13 +56,13 @@ public abstract class GaugeBase extends StackPane{
     }
     
     
-    public static GaugeBase createControl(JSONObject obj)
+    public static GaugeBase createGauge(JSONObject obj)
     {
-        int id = (int)obj.get("wid") + ((int)obj.get("gid")*100);
-        GaugeType type = Enum.valueOf(GaugeType.class, obj.get("type").toString());
-        String label = obj.get("label").toString();
+        int id = (int)obj.get("Wid") + ((int)obj.get("Gid")*100);
+        GaugeType type = Enum.valueOf(GaugeType.class, obj.get("Style").toString());
+        String label = obj.get("Label").toString();
         //if (type == OutputType.bars) return new BarsControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
-        if (type == GaugeType.dial) return new DialGauge(id, (double)obj.get("max"), (double)obj.get("min"), label);
+        if (type == GaugeType.dial) return new DialGauge(id, obj.getDouble("Max"), obj.getDouble("Min"), label);
         if (type == GaugeType.bool) return new BoolGauge(id, label);
         return null;
     }

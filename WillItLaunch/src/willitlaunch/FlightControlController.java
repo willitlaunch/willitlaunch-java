@@ -143,7 +143,7 @@ public class FlightControlController implements Initializable {
     public void updateGauge(int id, JSONObject object)
     {
         GaugeBase widget = outputGaugeMap.get(id);
-        widget.update(object);      
+        if (widget != null) widget.update(object);      
     }
     
     private void setGaugeDefaults(Region gauge) {

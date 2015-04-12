@@ -11,4 +11,7 @@ package willitlaunch.controls;
  */
 public enum ControlType {
     button,
+    slider,
+    toggle,
+    selector
 }

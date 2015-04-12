@@ -61,9 +61,9 @@ public abstract class ControlBase extends StackPane {
     
     public static ControlBase createControl(JSONObject obj)
     {
-        int id = (int)obj.get("id");
-        ControlType type = Enum.valueOf(ControlType.class, obj.get("type").toString());
-        String label = obj.get("label").toString();
+        int id = (int)obj.get("Wid") + ((int)obj.get("Gid")*100);
+        ControlType type = Enum.valueOf(ControlType.class, obj.get("Style").toString());
+        String label = obj.get("Label").toString();
         if (type == ControlType.button) return new ButtonControl(id, label);
 
 //        if (type == OutputType.dial) return new DialControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
