@@ -57,6 +57,7 @@ public class MessageManager {
             JSONObject widget = widgetList.getJSONObject(i);
             int wid = (int)widget.get("Wid");
             int gid = (int)widget.get("Gid");
+            if (wid==999 && gid == 999) fcc.goNoGoMode();
             int id = wid + gid*100;
             if (!fcc.outputGaugeMap.keySet().contains(id))
             {                                    

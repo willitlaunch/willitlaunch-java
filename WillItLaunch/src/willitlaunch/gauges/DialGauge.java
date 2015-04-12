@@ -35,6 +35,7 @@ public class DialGauge extends GaugeBase {
         linear.minValueProperty().bind(this.min);
         linear.maxValueProperty().bind(this.max);
         linear.valueProperty().bind(value);
+        linear.setTitle(label);
         addGauge(linear);
         this.configureGauge();
         
@@ -42,13 +43,13 @@ public class DialGauge extends GaugeBase {
 
     @Override
     protected final void configureGauge() {
-        linear.setTitle("Default");
-        linear.setUnit("°C");
-        linear.setSections(new Section(104, 140),
-                          new Section(140, 176),
-                          new Section(176, 212));
+        
+        //linear.setUnit("");
+        linear.setSections(new Section(0, 60),
+                          new Section(60, 120),
+                          new Section(120, 200));
         linear.setStyle("-needle       : rgb(  0,   0, 255);" +
-                       "-section0-fill: rgb(255, 0,   0);" +
+                       "-section0-fill: rgb(0, 255,   0);" +
                        "-section1-fill: rgb(0, 255,   0);" +
                        "-section2-fill: rgb(0,   0,   255);");
 

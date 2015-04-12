@@ -6,13 +6,18 @@
 
 package willitlaunch;
 
+import Utils.AnchorPaneUtils;
+import eu.hansolo.enzo.clock.Clock;
 import eu.hansolo.enzo.common.Section;
 import eu.hansolo.enzo.gauge.Gauge;
 import eu.hansolo.enzo.gauge.Linear;
 import eu.hansolo.enzo.gauge.RadialBargraph;
 import eu.hansolo.enzo.gauge.RadialSteelGauge;
 import eu.hansolo.enzo.gauge.SimpleGauge;
+import eu.hansolo.enzo.sevensegment.SevenSegment;
 import java.net.URL;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -20,7 +25,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -53,7 +60,7 @@ public class FlightControlController implements Initializable {
     @FXML
     private ListView<?> checkList;
     @FXML
-    private Label timeLabel;
+    private AnchorPane timeLabel;
     @FXML
     private Button goButton;
     @FXML
@@ -67,15 +74,27 @@ public class FlightControlController implements Initializable {
     public HashMap<Integer,ControlBase> outputControlMap = new HashMap<Integer,ControlBase>();
     public StringProperty title = new SimpleStringProperty();
     private DoubleProperty gaugeValue = new SimpleDoubleProperty(0.0);
+    public ObjectProperty<LocalTime> timeLeft = new SimpleObjectProperty<LocalTime>();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         controllerTitle.textProperty().bind(title);
-        msg.listen();  
+        msg.listen(); 
+        setUpTimeCounterAsClock();
     }   
     
+    private void setUpTimeCounterAsClock(){
+        Clock timeCounter = new Clock(timeLeft.get());
+        timeCounter.timeProperty().bind(timeLeft);
+        timeCounter.setSecondPointerVisible(true);
+        timeCounter.setDesign(Clock.Design.DB);
+
+        timeLabel.getChildren().setAll(timeCounter);
+        AnchorPaneUtils.setAnchors(timeCounter, 0.0, 0.0, 0.0, 0.0);
+    }
         
     public void createGauge(GaugeBase gauge){
         outputGaugeMap.put(gauge.id, gauge);
@@ -153,6 +172,10 @@ public class FlightControlController implements Initializable {
                        "-section1-fill: rgb(0, 255,   0);" +
                        "-section2-fill: rgb(0,   0,   255);");
 
+    }
+    
+    public void goNoGoMode(){
+        
     }
     
 }
