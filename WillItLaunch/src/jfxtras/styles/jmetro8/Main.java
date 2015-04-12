@@ -55,7 +55,7 @@ public class Main extends Application {
     static final String SLIDER_RESOURCE = "JMetro Slider.fxml";
     static final String TOGGLE_SWITCH_RESOURCE = "JMetro ToggleSwitch.fxml";
 
-    static final String RESOURCE = TOGGLE_SWITCH_RESOURCE;
+    static final String RESOURCE = PUSH_BUTTON_RESOURCE;
 
     static final String LIGHT_STYLE_SHEET = "JMetroLightTheme.css";
     static final String DARK_STYLE_SHEET = "JMetroDarkTheme.css";

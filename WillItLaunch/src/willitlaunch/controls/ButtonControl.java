@@ -6,6 +6,8 @@
 
 package willitlaunch.controls;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.scene.control.Button;
 import org.json.JSONObject;
 
 /**
@@ -13,24 +15,27 @@ import org.json.JSONObject;
  * @author ben
  */
 public class ButtonControl extends ControlBase {
+    Button button = new Button();
     
     public ButtonControl (int id, String label){
         super(id);
+        button.textProperty().set(label);
+        updated = button.pressedProperty().asObject();
     }
     
     @Override
     protected void configureGauge() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void update(JSONObject obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     protected void callServer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }

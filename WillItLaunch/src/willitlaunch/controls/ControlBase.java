@@ -8,6 +8,7 @@ package willitlaunch.controls;
 
 import Utils.AnchorPaneUtils;
 import java.util.Random;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
@@ -33,6 +34,7 @@ public abstract class ControlBase extends StackPane {
     public StringProperty name = new SimpleStringProperty();
     public Label title = new Label();
     public Object value;
+    public ReadOnlyObjectProperty<?> updated;
     
     
     public ControlBase(int id){
@@ -62,7 +64,13 @@ public abstract class ControlBase extends StackPane {
         int id = (int)obj.get("id");
         ControlType type = Enum.valueOf(ControlType.class, obj.get("type").toString());
         String label = obj.get("label").toString();
+<<<<<<< Updated upstream
         if (type == ControlType.button) return new ButtonControl(id, label);
+=======
+        if (type == ControlType.button) return new ButtonControl(id,label);
+        
+//        if (type == OutputType.bars) return new BarsControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
+>>>>>>> Stashed changes
 //        if (type == OutputType.dial) return new DialControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
 //        if (type == OutputType.bars) return new BoolControl(id, label);
         return null;
