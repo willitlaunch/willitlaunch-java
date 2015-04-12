@@ -56,11 +56,15 @@ public class MessageManager {
     
     public void updateStatus(JSONObject obj)
     {
-        if (!obj.keySet().contains("Status")) return;
-        System.out.println(obj.toString());
-        String status = obj.get("Status").toString();     
-        if (status == "POLL") fcc.enablePollMode();
-        if (status == "NOPOLL") fcc.disablePollMode();
+        if (!obj.keySet().contains("Status")){
+            return;
+        } else {
+            System.out.println(obj.toString());
+            String status = obj.get("Status").toString();     
+            if (status.equals("POLL")) fcc.enablePollMode();
+            if (status.equals("NOPOLL")) fcc.disablePollMode();
+        }
+        
     }
     
     public void updateName(JSONObject obj)
@@ -85,7 +89,7 @@ public class MessageManager {
             JSONObject widget = widgetList.getJSONObject(i);
             int wid = (int)widget.get("Wid");
             int gid = (int)widget.get("Gid");
-            if (wid==999 && gid == 999) fcc.goNoGoMode();
+           
             int id = wid + gid*100;
             if (!fcc.outputGaugeMap.keySet().contains(id))
             {                                    

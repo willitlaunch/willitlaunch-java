@@ -7,7 +7,6 @@
 package willitlaunch.gauges;
 
 import Utils.AnchorPaneUtils;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.util.Random;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

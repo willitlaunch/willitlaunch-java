@@ -32,13 +32,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javax.swing.SwingUtilities;
 import org.json.JSONObject;
 import willitlaunch.controls.ButtonControl;
@@ -69,13 +76,15 @@ public class FlightControlController implements Initializable {
     private GridPane controlsGrid;
     @FXML
     private Label controllerTitle;
+    @FXML
+    private StackPane stackPane;
 
     public HashMap<Integer,GaugeBase> outputGaugeMap = new HashMap<Integer,GaugeBase>();
     public HashMap<Integer,ControlBase> outputControlMap = new HashMap<Integer,ControlBase>();
     public StringProperty title = new SimpleStringProperty();
     private DoubleProperty gaugeValue = new SimpleDoubleProperty(0.0);
     public ObjectProperty<LocalTime> timeLeft = new SimpleObjectProperty<LocalTime>();
-    
+    HBox goNogoPane = new HBox();
     /**
      * Initializes the controller class.
      */
@@ -150,7 +159,7 @@ public class FlightControlController implements Initializable {
         Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                          controlsGrid.getChildren().clear();
+                          controlsGrid.setVisible(false);
                     }
                 });   
       
@@ -161,22 +170,25 @@ public class FlightControlController implements Initializable {
         Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        outputControlMap.keySet().forEach(id -> {
-                            ControlBase control = outputControlMap.get(id);
-                            gaugesGrid.getChildren().add(control);                            
-                        });
+                        controlsGrid.setVisible(true);
+//                        outputControlMap.keySet().forEach(id -> {
+//                            ControlBase control = outputControlMap.get(id);
+//                            gaugesGrid.getChildren().add(control);                            
+//                        });
                     }
                 });        
     } 
     
     public void enablePollMode()
     {
-        hideControls();     
+        hideControls();  
+        showGoNoGo();
     }
     
     public void disablePollMode()
     {
         showControls();
+        hideGoNoGo();
     }
     
     public void createControl(ControlBase control,int row,int col){
@@ -227,8 +239,22 @@ public class FlightControlController implements Initializable {
 
     }
     
-    public void goNoGoMode(){
+    public void showGoNoGo(){
+        goNogoPane.setPrefSize(3000,2000);
+        Button go = new Button();
+        Button no = new Button();
+        go.setPrefSize(1500, 300);
+        go.setPrefSize(1500,300);
+        go.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+        no.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        goNogoPane.getChildren().addAll(go,no);
+        stackPane.getChildren().add(goNogoPane);
+        goNogoPane.toFront();
         
+    }
+    
+    public void hideGoNoGo(){
+        stackPane.getChildren().remove(goNogoPane);
     }
     
 }
