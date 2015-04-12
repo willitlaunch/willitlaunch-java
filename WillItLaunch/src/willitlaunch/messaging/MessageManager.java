@@ -79,7 +79,7 @@ public class MessageManager {
         if (!obj.keySet().contains("POLLCONT")) return;
         JSONObject polcon = obj.getJSONObject("POLLCONT");
         String name = polcon.get("ControllerName").toString();
-        fcc.setName(name);
+        fcc.setName(name+ " - Go?");
     }
     
     public void updateTimeLeft(JSONObject obj)
@@ -116,7 +116,7 @@ public class MessageManager {
         for(int i=0;i<widgetList.length();i++)
         {
             JSONObject widget = widgetList.getJSONObject(i);
-            if ((int)widget.getDouble("Wid") == 99 && (int)widget.getDouble("Gid") == 99) continue;
+           // if ((int)widget.getDouble("Wid") == 99 && (int)widget.getDouble("Gid") == 99) continue;
             ControlBase wid = ControlBase.createControl(widget);
             if (wid != null) {
                 wid.setOnChangedEvent(o -> sendUpdatedValue(wid));

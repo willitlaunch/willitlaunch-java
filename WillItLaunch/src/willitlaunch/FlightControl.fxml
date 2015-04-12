@@ -14,7 +14,6 @@
             <VBox minWidth="150.0" prefHeight="200.0" prefWidth="300.0" HBox.hgrow="NEVER">
                <children>
                   <ListView fx:id="checkList" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="3000.0" text="Ready" />
                   <VBox>
                      <children>
                         <AnchorPane fx:id="timeLabel" prefHeight="300.0" prefWidth="3000.0" />

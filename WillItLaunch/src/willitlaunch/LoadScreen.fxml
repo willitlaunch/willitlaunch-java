@@ -23,7 +23,7 @@
             <StackPane fx:id="logoPane" prefHeight="150.0" prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <TextField fx:id="ipBox" prefWidth="400.0" promptText="Connect to Mission Control" />
+                  <TextField fx:id="ipBox" prefWidth="400.0" promptText="Connect to Mission Control" text="ws://10.0.1.23:8080/ws" />
                   <Button fx:id="connect" mnemonicParsing="false" onAction="#connectTo" text="Connect" />
                </children>
                <opaqueInsets>
