@@ -28,11 +28,11 @@ Countdown? (trigger/reset etc?)
 
 ##Team 
 Our team consists of 5 members, three of which have come to previous space apps competitions and two newbies!
-1. Ben Oxley @b3noxley
-2. Adam Grieg @randomskk
-3. Tom Dalby
-4. Andrew Cowan
-5. Marcello Seri
+* Ben Oxley @b3noxley
+* Adam Grieg @randomskk
+* Tom Dalby
+* Andrew Cowan
+* Marcello Seri
 
 ##How we did it
 For a go no-go game, the temptation to program it in Google's Go language was too strong (at least for Adam). The backend server is written in Go and provides a websockets interface for our frontend GUI which is written in Java and JavaFX. 
