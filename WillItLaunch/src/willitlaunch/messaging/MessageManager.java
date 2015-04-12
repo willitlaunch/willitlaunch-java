@@ -19,7 +19,7 @@ import willitlaunch.gauges.GaugeBase;
 
 public class MessageManager { 
     FlightControlController fcc; 
-    WebSocketClient wsc;
+    public WebSocketClient wsc;
     Socket socket;
     boolean isFirstMessage = true;
     //public final String url = "ws://intense-woodland-5574.herokuapp.com/ws";

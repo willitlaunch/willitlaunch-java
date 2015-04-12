@@ -7,8 +7,10 @@
 package willitlaunch.gauges;
 
 import eu.hansolo.enzo.gauge.Linear;
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.geometry.Orientation;
 import javafx.scene.layout.GridPane;
 import org.json.JSONObject;
 
@@ -29,6 +31,7 @@ public class BarsGauge extends GaugeBase {
         this.min.set(min);
         
         linear = new Linear();
+        linear.setOrientation(Orientation.HORIZONTAL);
         linear.minValueProperty().bind(this.min);
         linear.maxValueProperty().bind(this.max);
         linear.valueProperty().bind(value);
@@ -40,7 +43,13 @@ public class BarsGauge extends GaugeBase {
     public void update(JSONObject obj)
     {
         double val = obj.getDouble("Value");
-        value.set(val);
+        
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                value.set(val);
+            }
+        });
     }
     
     @Override

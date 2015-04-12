@@ -164,12 +164,9 @@ public class FlightControlController implements Initializable {
     
     public void hideControls()
     {
-        Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
+        
                           controlsGrid.setVisible(false);
-                    }
-                });   
+
       
     }
     
@@ -189,14 +186,24 @@ public class FlightControlController implements Initializable {
     
     public void enablePollMode()
     {
-        hideControls();  
-        showGoNoGo();
+        Platform.runLater(new Runnable() {
+               @Override
+                    public void run() {
+                hideControls();  
+                showGoNoGo();
+                    }
+        });   
     }
     
     public void disablePollMode()
     {
-        showControls();
-        hideGoNoGo();
+        Platform.runLater(new Runnable() {
+               @Override
+                    public void run() {
+                showControls();
+                hideGoNoGo();
+            }
+        });   
     }
     
     public void createControl(ControlBase control,int row,int col){
@@ -212,7 +219,8 @@ public class FlightControlController implements Initializable {
     
     public void updateGauge(int id, JSONObject object){
         GaugeBase widget = outputGaugeMap.get(id);
-        if (widget != null) widget.update(object);      
+        if (widget != null) 
+            widget.update(object);      
     }
     
     public void updateClock(int value)
@@ -268,6 +276,8 @@ public class FlightControlController implements Initializable {
         Button go = new Button("Go");
         Button no = new Button("No Go");
         go.setPrefSize(1500, 300);
+        go.setOnMouseClicked(event -> MessageManager.get().wsc.send("{\"Gid\":99,\"Wid\":100,\"Value\":true}"));
+        no.setOnMouseClicked(event -> MessageManager.get().wsc.send("{\"Gid\":99,\"Wid\":100,\"Value\":false}"));
         no.setPrefSize(1500, 300);
         goNogoPane.getChildren().addAll(go,no);
         stackPane.getChildren().add(goNogoPane);

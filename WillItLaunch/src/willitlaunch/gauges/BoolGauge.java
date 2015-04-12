@@ -13,6 +13,7 @@ import eu.hansolo.enzo.gauge.SimpleGauge;
 import eu.hansolo.enzo.simpleindicator.SimpleIndicator;
 import eu.hansolo.enzo.simpleindicator.SimpleIndicator.IndicatorStyle;
 import eu.hansolo.enzo.simpleindicator.SimpleIndicatorBuilder;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
@@ -57,7 +58,12 @@ public class BoolGauge extends GaugeBase {
     public void update(JSONObject obj)
     {
         boolean val = (boolean)obj.get("Value");
-        value.set(val);
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                value.set(val);
+            }
+        });
     }
     
     
