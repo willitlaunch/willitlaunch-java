@@ -59,7 +59,7 @@ public abstract class GaugeBase extends StackPane{
         int id = (int)obj.get("Wid") + ((int)obj.get("Gid")*100);
         GaugeType type = Enum.valueOf(GaugeType.class, obj.get("Style").toString());
         String label = obj.get("Label").toString();
-        //if (type == OutputType.bars) return new BarsControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
+        if (type == GaugeType.bar) return new BarsGauge(id, obj.getDouble("Max"), obj.getDouble("Min"), label);
         if (type == GaugeType.dial) return new DialGauge(id, obj.getDouble("Max"), obj.getDouble("Min"), label);
         if (type == GaugeType.bool) return new BoolGauge(id, label);
         return null;
