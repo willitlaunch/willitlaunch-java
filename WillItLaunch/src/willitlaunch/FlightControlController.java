@@ -101,7 +101,7 @@ public class FlightControlController implements Initializable {
         timeCounter.setSecondPointerVisible(true);
         timeCounter.setDesign(Clock.Design.DB);
 
-        gaugesGrid.setStyle("-fx-background-color:blue; -fx-padding:30");
+        gaugesGrid.setStyle("-fx-background-color:#CDCDCD;");
         
         timeLabel.getChildren().setAll(timeCounter);
         AnchorPaneUtils.setAnchors(timeCounter, 0.0, 0.0, 0.0, 0.0);

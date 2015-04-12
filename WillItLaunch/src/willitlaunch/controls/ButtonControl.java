@@ -26,7 +26,6 @@ public class ButtonControl extends ControlBase {
     public ButtonControl (int id, String label){
         super(id);
         value = false;
-        this.setBackground(new Background(new BackgroundFill(Color.YELLOW, null, null)));
         //this.setMinSize(100, 100);       
         button.textProperty().set(label);
         addControl(button);

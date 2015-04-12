@@ -47,7 +47,6 @@ public class SliderControl extends ControlBase {
         slider.minProperty().bind(this.min);
         slider.maxProperty().bind(this.max);
         value.bind(slider.valueProperty());
-        this.setBackground(new Background(new BackgroundFill(Color.YELLOW, null, null)));
         //this.setMinSize(100, 100);
         
         value.addListener(o -> MessageManager.get().sendUpdatedValue(this));
