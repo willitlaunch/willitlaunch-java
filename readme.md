@@ -4,7 +4,7 @@
 
 Will it launch is our attempt at a flight control style multiplayer game. The object of the game is to successfully work as a team to monitor the flight systems of a rocket just before launch and decide if the rocket is safe to launch. Time is critical but you can't sacrifice the safety of the astronauts!
 
-The flight controller views include: 
+The flight controller views include:
 
 FIDO
 Launch angle (L/R/U/D)
@@ -26,7 +26,7 @@ CONTROL
 Bird scare (beep)
 Countdown? (trigger/reset etc?)
 
-##Team 
+##Team
 Our team consists of 5 members, three of which have come to previous space apps competitions and two newbies!
 * Ben Oxley @b3noxley
 * Adam Grieg @randomskk
@@ -35,6 +35,13 @@ Our team consists of 5 members, three of which have come to previous space apps 
 * Marcello Seri
 
 ##How we did it
-For a go no-go game, the temptation to program it in Google's Go language was too strong (at least for Adam). The backend server is written in Go and provides a websockets interface for our frontend GUI which is written in Java and JavaFX. 
+For a go no-go game, the temptation to program it in Google's Go language was too strong (at least for Adam). The backend server is written in Go and provides a websockets interface for our frontend GUI which is written in Java and JavaFX.
 
 We have heavily used the jave-websockets library, jfxtras and the excellent Enzo controls library.
+![The javascript / HTML5 web frontend](http://i.imgur.com/FuhUR3c.png)
+![Waiting for all Flight Controllers to be Ready](http://i.imgur.com/leeWGjh.png)
+
+![The Go, No-Go decision](http://i.imgur.com/A7p7cO0.png)
+
+![The Will it Launch?! JavaFX Splash Screen](http://i.imgur.com/MSAvzgi.png)
+![The JavaFX Control Panel](http://i.imgur.com/4IETdeQ.png)
