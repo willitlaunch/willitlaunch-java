@@ -47,7 +47,8 @@ public abstract class ControlBase extends StackPane {
         title.textProperty().bind(name);
         this.getChildren().add(title);
         StackPane.setAlignment(title, Pos.TOP_CENTER);
-       
+        this.setStyle("-fx-fill:red");
+        
         title.setTextAlignment(TextAlignment.CENTER);
         title.setAlignment(Pos.CENTER);             
     }
@@ -70,9 +71,8 @@ public abstract class ControlBase extends StackPane {
         int id = (int)obj.get("Wid") + ((int)obj.get("Gid")*100);
         ControlType type = Enum.valueOf(ControlType.class, obj.get("Style").toString());
         String label = obj.get("Label").toString();
-        if (type == ControlType.button) return new ButtonControl(id, label);
-        
-//        if (type == OutputType.dial) return new DialControl(id, (double)obj.get("max"), (double)obj.get("min"), label);
+        if (type == ControlType.button) return new ButtonControl(id, label);        
+        if (type == ControlType.slider) return new SliderControl(id, (double)obj.getDouble("Min"), (double)obj.getDouble("Max"), label);
 //        if (type == OutputType.bars) return new BoolControl(id, label);
         return null;
     }

@@ -92,6 +92,8 @@ public class FlightControlController implements Initializable {
         timeCounter.setSecondPointerVisible(true);
         timeCounter.setDesign(Clock.Design.DB);
 
+        gaugesGrid.setStyle("-fx-background-color:blue; -fx-padding:30");
+        
         timeLabel.getChildren().setAll(timeCounter);
         AnchorPaneUtils.setAnchors(timeCounter, 0.0, 0.0, 0.0, 0.0);
     }
@@ -208,8 +210,6 @@ public class FlightControlController implements Initializable {
 //    gauge.setUnit("°F");
 //    gauge.setMinValue(32);
 //    gauge.setMaxValue(212);
-        
-
     }
     
     private void setControlDefaults(Region control) {

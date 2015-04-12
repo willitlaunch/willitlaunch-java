@@ -45,7 +45,7 @@ public class MessageManager {
     public void convertMessageToData(String message)
     {
         JSONObject obj = new JSONObject(message);
-        //System.out.println(obj.toString());
+        System.out.println(obj.toString());
         updateName(obj);
         updateStatus(obj);
         updateOutputControlsFromMessage(obj);
