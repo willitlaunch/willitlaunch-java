@@ -24,7 +24,7 @@ public class BarsGauge extends GaugeBase {
     Linear linear;
     public BarsGauge(int id, double max, double min, String label) {
         super(id);
-        
+        this.title.setText(label);
         this.max.set(max);
         this.min.set(min);
         
